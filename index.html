@@ -63,16 +63,18 @@
             text-decoration: none; text-align: center; font-weight: 800; font-size: 14px; color: #111;
             box-shadow: 4px 4px 0px #111;
         }
-        .web-btn:active { transform: translate(2px, 2px); box-shadow: 0px 0px 0px #111; }
 
-        /* 카카오톡 전용 안내 레이어 */
+        /* [핵심] 카카오톡 전용 안내 레이어 */
         #kakaotalk-guide {
             display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(0,0,0,0.85); color: #fff; z-index: 10000;
-            padding: 40px 20px; box-sizing: border-box; text-align: center;
+            background: rgba(0,0,0,0.9); color: #fff; z-index: 10000;
+            padding: 20px; box-sizing: border-box; text-align: center;
         }
-        .kakao-box { background: #fee500; color: #3c1e1e; padding: 25px; border-radius: 20px; font-weight: 800; }
-        .kakao-arrow { font-size: 40px; margin-bottom: 20px; }
+        .kakao-box { background: #fee500; color: #3c1e1e; padding: 25px; border-radius: 20px; font-weight: 800; position: relative; }
+        
+        /* 기기별 화살표 위치 조절용 */
+        .arrow-up { position: absolute; top: -50px; right: 10px; font-size: 40px; color: #fee500; display: none; }
+        .arrow-down { position: absolute; bottom: -50px; right: 10px; font-size: 40px; color: #fee500; display: none; }
 
         .footer { text-align: center; font-size: 11px; color: #adb5bd; margin-top: 60px; padding-bottom: 40px; font-weight: 600; }
     </style>
@@ -80,12 +82,11 @@
 <body>
 
 <div id="kakaotalk-guide">
-    <div class="kakao-arrow">↑↑↑</div>
+    <div id="kakao-arrow-up" class="arrow-up">↑↑↑</div>
     <div class="kakao-box">
-        카톡 브라우저에서는<br>바로가기 설치가 안 됩니다!<br><br>
-        오른쪽 상단 [⋮] 버튼을 눌러<br>
-        <span style="text-decoration: underline;">"다른 브라우저로 열기"</span>를<br>선택해 주세요!
+        <span id="kakao-msg"></span>
     </div>
+    <div id="kakao-arrow-down" class="arrow-down">↓↓↓</div>
 </div>
 
 <div class="container">
@@ -150,37 +151,40 @@
         <span class="label">Step 4. 필수 및 공식 앱 설치</span>
         <a href="https://play.google.com/store/apps/details?id=com.nhn.android.search&hl=ko" class="card">
             <div class="icon-round"><img src="https://i.imgur.com/0M5jHW4.png" alt="네이버"></div>
-            <div class="text-area">
-                <span class="main-t">네이버 앱 설치</span>
-                <span class="sub-t">안드로이드 바로가기 필수 앱</span>
-            </div>
+            <div class="text-area"><span class="main-t">네이버 앱 설치</span><span class="sub-t">안드로이드 필수 앱</span></div>
         </a>
         <a href="https://play.google.com/store/apps/details?id=com.coupang.mobile&hl=ko" class="card">
             <div class="icon-round"><img src="https://i.imgur.com/OvoXJTq.png" alt="쿠팡앱"></div>
-            <div class="text-area">
-                <span class="main-t">쿠팡 공식 앱 설치</span>
-                <span class="sub-t">구글 플레이스토어 공식 페이지</span>
-            </div>
+            <div class="text-area"><span class="main-t">쿠팡 공식 앱 설치</span><span class="sub-t">공식 스토어 이동</span></div>
         </a>
         <a href="https://play.google.com/store/apps/details?id=com.alibaba.aliexpresshd&hl=ko" class="card">
             <div class="icon-round"><img src="https://ae01.alicdn.com/kf/Hc7b2ba35dce542e99e9462915f23fa7cG.jpg_640x640Q90.jpg_.webp" alt="알리앱"></div>
-            <div class="text-area">
-                <span class="main-t">알리익스프레스 앱 설치</span>
-                <span class="sub-t">구글 플레이스토어 공식 페이지</span>
-            </div>
+            <div class="text-area"><span class="main-t">알리익스프레스 앱 설치</span><span class="sub-t">공식 스토어 이동</span></div>
         </a>
     </div>
 
-    <div class="footer">
-        © 2026 SHOPPING GATE MANAGER. ALL RIGHTS RESERVED.
-    </div>
+    <div class="footer">© 2026 SHOPPING GATE MANAGER.</div>
 </div>
 
 <script>
     function isKakaotalk() { return /KAKAOTALK/i.test(navigator.userAgent); }
+    function isIos() { return /iPhone|iPad|iPod/i.test(navigator.userAgent); }
+
     window.onload = function() {
         if (isKakaotalk()) {
-            document.getElementById('kakaotalk-guide').style.display = 'block';
+            const guide = document.getElementById('kakaotalk-guide');
+            const msg = document.getElementById('kakao-msg');
+            guide.style.display = 'block';
+
+            if (isIos()) {
+                // 아이폰 카톡: 우측 하단 점 세개 또는 화살표
+                document.getElementById('kakao-arrow-down').style.display = 'block';
+                msg.innerHTML = "아이폰 카톡 브라우저에서는<br>바로가기 설치가 안 됩니다!<br><br>오른쪽 하단 <b>[⋯]</b> 또는 <b>[↑]</b> 버튼을 눌러<br><span style='text-decoration: underline;'>'Safari로 열기'</span>를 선택해 주세요!";
+            } else {
+                // 안드로이드 카톡: 우측 상단 점 세개
+                document.getElementById('kakao-arrow-up').style.display = 'block';
+                msg.innerHTML = "안드로이드 카톡 브라우저에서는<br>바로가기 설치가 안 됩니다!<br><br>오른쪽 상단 <b>[⋮]</b> 버튼을 눌러<br><span style='text-decoration: underline;'>'다른 브라우저로 열기'</span>를 선택해 주세요!";
+            }
         }
     };
 </script>

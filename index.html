@@ -5,21 +5,18 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>SHOPPING LINK</title>
     <style>
-        /* 기본 폰트 및 배경 설정 */
         body { 
             font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, system-ui, sans-serif; 
-            background-color: #f1f3f5; 
-            margin: 0; padding: 0; display: flex; justify-content: center;
+            background-color: #f1f3f5; margin: 0; padding: 0; display: flex; justify-content: center;
         }
         .container { width: 100%; max-width: 420px; padding: 20px; box-sizing: border-box; }
 
-        /* 최상단 공정위 통합 고지 문구 */
+        /* 공정위 통합 고지 문구 */
         .ftc-notice { 
             background: #fff; border: 2px solid #111; border-radius: 14px; padding: 15px;
             font-size: 11px; color: #555; line-height: 1.6; margin-bottom: 25px;
             text-align: center; box-shadow: 4px 4px 0px #111;
         }
-        .ftc-notice b { color: #111; }
 
         header { padding: 10px 0 25px; text-align: left; }
         header h1 { font-size: 28px; font-weight: 900; margin: 0; color: #111; letter-spacing: -1.5px; }
@@ -47,11 +44,10 @@
         .text-area .main-t { display: block; font-size: 18px; font-weight: 800; color: #111; }
         .text-area .sub-t { display: block; font-size: 12px; color: #777; margin-top: 5px; font-weight: 500; }
 
-        /* 아이폰 전용 상세 가이드 섹션 */
+        /* 아이폰 전용 가이드 섹션 */
         .iphone-guide { 
             background: #fff; border: 2.5px solid #111; border-radius: 20px; 
-            padding: 20px; margin-bottom: 30px; box-shadow: 5px 5px 0px #ff4747;
-            text-align: left;
+            padding: 20px; margin-bottom: 30px; box-shadow: 5px 5px 0px #ff4747; text-align: left;
         }
         .guide-header { font-size: 16px; font-weight: 900; color: #ff4747; margin-bottom: 18px; text-align: center; }
         .chapter { margin-bottom: 15px; border-bottom: 1px dashed #eee; padding-bottom: 10px; }
@@ -69,11 +65,28 @@
         }
         .web-btn:active { transform: translate(2px, 2px); box-shadow: 0px 0px 0px #111; }
 
-        /* 최하단 카피라이터 */
+        /* 카카오톡 전용 안내 레이어 */
+        #kakaotalk-guide {
+            display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.85); color: #fff; z-index: 10000;
+            padding: 40px 20px; box-sizing: border-box; text-align: center;
+        }
+        .kakao-box { background: #fee500; color: #3c1e1e; padding: 25px; border-radius: 20px; font-weight: 800; }
+        .kakao-arrow { font-size: 40px; margin-bottom: 20px; }
+
         .footer { text-align: center; font-size: 11px; color: #adb5bd; margin-top: 60px; padding-bottom: 40px; font-weight: 600; }
     </style>
 </head>
 <body>
+
+<div id="kakaotalk-guide">
+    <div class="kakao-arrow">↑↑↑</div>
+    <div class="kakao-box">
+        카톡 브라우저에서는<br>바로가기 설치가 안 됩니다!<br><br>
+        오른쪽 상단 [⋮] 버튼을 눌러<br>
+        <span style="text-decoration: underline;">"다른 브라우저로 열기"</span>를<br>선택해 주세요!
+    </div>
+</div>
 
 <div class="container">
     <div class="ftc-notice">
@@ -86,7 +99,6 @@
 
     <div class="section-box">
         <span class="label">Step 1. Android 바로가기 설치</span>
-        
         <a href="intent://addshortcut?url=https://link.coupang.com/a/cpO0Kv&amp;icon=https://i.imgur.com/pKkM4Zm.png&amp;title=쿠팡&amp;serviceCode=whois&amp;version=11#Intent;scheme=naversearchapp;action=android.intent.action.VIEW;category=android.intent.category.BROWSABLE;package=com.nhn.android.search;end" class="card">
             <div class="icon-round"><img src="https://i.imgur.com/pKkM4Zm.png" alt="쿠팡"></div>
             <div class="text-area">
@@ -94,7 +106,6 @@
                 <span class="sub-t">네이버 앱 연동 자동 설치</span>
             </div>
         </a>
-
         <a href="intent://addshortcut?url=https://s.click.aliexpress.com/e/_DkmHcWJ&amp;icon=https://ae01.alicdn.com/kf/Hc7b2ba35dce542e99e9462915f23fa7cG.jpg_640x640Q90.jpg_.webp&amp;title=알리&amp;serviceCode=whois&amp;version=11#Intent;scheme=naversearchapp;action=android.intent.action.VIEW;category=android.intent.category.BROWSABLE;package=com.nhn.android.search;end" class="card">
             <div class="icon-round"><img src="https://ae01.alicdn.com/kf/Hc7b2ba35dce542e99e9462915f23fa7cG.jpg_640x640Q90.jpg_.webp" alt="알리"></div>
             <div class="text-area">
@@ -110,7 +121,7 @@
             <div class="guide-header">🍎 iPhone 수동 설치 방법</div>
             <div class="chapter">
                 <span class="chapter-title">1. 쇼핑몰 접속</span>
-                <span class="chapter-desc">아래 <span class="highlight">[Step 3]</span> 버튼을 눌러 사파리 브라우저로 접속하세요.</span>
+                <span class="chapter-desc">아래 <span class="highlight">[Step 3]</span> 버튼을 눌러 사파리로 접속하세요.</span>
             </div>
             <div class="chapter">
                 <span class="chapter-title">2. 공유 메뉴 실행</span>
@@ -118,11 +129,11 @@
             </div>
             <div class="chapter">
                 <span class="chapter-title">3. 홈 화면 추가 찾기</span>
-                <span class="chapter-desc">리스트를 끝까지 내려 <span class="highlight">[동작 편집...]</span> 또는 <span class="highlight">[더 보기]</span>를 확인한 뒤, <span class="highlight">[홈 화면에 추가]</span>를 선택하세요.</span>
+                <span class="chapter-desc">리스트를 내려 <span class="highlight">[더 보기]</span> 또는 <span class="highlight">[동작 편집]</span> 내의 <span class="highlight">[홈 화면에 추가]</span>를 선택하세요.</span>
             </div>
             <div class="chapter">
                 <span class="chapter-title">4. 최종 등록</span>
-                <span class="chapter-desc">우측 상단 <span class="highlight">[추가]</span>를 누르면 바탕화면에 아이콘이 생성됩니다.</span>
+                <span class="chapter-desc">우측 상단 <span class="highlight">[추가]</span>를 누르면 바탕화면에 생성됩니다.</span>
             </div>
         </div>
     </div>
@@ -137,28 +148,25 @@
 
     <div class="section-box">
         <span class="label">Step 4. 필수 및 공식 앱 설치</span>
-        
         <a href="https://play.google.com/store/apps/details?id=com.nhn.android.search&hl=ko" class="card">
             <div class="icon-round"><img src="https://i.imgur.com/0M5jHW4.png" alt="네이버"></div>
             <div class="text-area">
                 <span class="main-t">네이버 앱 설치</span>
-                <span class="sub-t">안드로이드 바로가기 생성을 위한 필수 앱</span>
+                <span class="sub-t">안드로이드 바로가기 필수 앱</span>
             </div>
         </a>
-
         <a href="https://play.google.com/store/apps/details?id=com.coupang.mobile&hl=ko" class="card">
             <div class="icon-round"><img src="https://i.imgur.com/OvoXJTq.png" alt="쿠팡앱"></div>
             <div class="text-area">
                 <span class="main-t">쿠팡 공식 앱 설치</span>
-                <span class="sub-t">구글 플레이스토어 공식 페이지 이동</span>
+                <span class="sub-t">구글 플레이스토어 공식 페이지</span>
             </div>
         </a>
-
         <a href="https://play.google.com/store/apps/details?id=com.alibaba.aliexpresshd&hl=ko" class="card">
             <div class="icon-round"><img src="https://ae01.alicdn.com/kf/Hc7b2ba35dce542e99e9462915f23fa7cG.jpg_640x640Q90.jpg_.webp" alt="알리앱"></div>
             <div class="text-area">
                 <span class="main-t">알리익스프레스 앱 설치</span>
-                <span class="sub-t">구글 플레이스토어 공식 페이지 이동</span>
+                <span class="sub-t">구글 플레이스토어 공식 페이지</span>
             </div>
         </a>
     </div>
@@ -167,6 +175,15 @@
         © 2026 SHOPPING GATE MANAGER. ALL RIGHTS RESERVED.
     </div>
 </div>
+
+<script>
+    function isKakaotalk() { return /KAKAOTALK/i.test(navigator.userAgent); }
+    window.onload = function() {
+        if (isKakaotalk()) {
+            document.getElementById('kakaotalk-guide').style.display = 'block';
+        }
+    };
+</script>
 
 </body>
 </html>

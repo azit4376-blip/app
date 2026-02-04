@@ -5,13 +5,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>SHOPPING LINK</title>
     <style>
-        /* [소프트 미니멀 입체 테마] */
+        /* [1.2 업그레이드: 뉴모피즘 프로 테마] */
         :root {
             --bg-color: #f0f2f5;
-            --card-bg: #f0f2f5;
             --shadow-light: #ffffff;
             --shadow-dark: #d1d9e6;
-            --primary-blue: #3498db;
+            --primary-blue: #4a90e2;
             --text-main: #2c3e50;
             --text-sub: #7f8c8d;
         }
@@ -20,40 +19,56 @@
             font-family: 'Pretendard', -apple-system, sans-serif;
             background-color: var(--bg-color); margin: 0; padding: 0; 
             display: flex; justify-content: center; color: var(--text-main);
+            position: relative; overflow-x: hidden; min-height: 100vh;
         }
-        .container { width: 100%; max-width: 420px; padding: 25px; box-sizing: border-box; }
 
-        /* 공정위 통합 고지 문구 (최상단) */
+        /* [2번 업그레이드] 은은한 망사 그라데이션 배경 유닛 */
+        body::before {
+            content: ""; position: fixed; top: -10%; left: -10%; width: 50%; height: 50%;
+            background: radial-gradient(circle, rgba(74, 144, 226, 0.1) 0%, rgba(240, 242, 245, 0) 70%);
+            z-index: -1; pointer-events: none;
+        }
+        body::after {
+            content: ""; position: fixed; bottom: -10%; right: -10%; width: 60%; height: 60%;
+            background: radial-gradient(circle, rgba(255, 71, 87, 0.08) 0%, rgba(240, 242, 245, 0) 70%);
+            z-index: -1; pointer-events: none;
+        }
+
+        .container { width: 100%; max-width: 420px; padding: 25px; box-sizing: border-box; z-index: 1; }
+
+        /* 공정위 고지 문구 (음각 스타일) */
         .ftc-notice { 
-            background: var(--card-bg); border-radius: 15px; padding: 15px;
+            background: var(--bg-color); border-radius: 15px; padding: 15px;
             font-size: 11px; color: var(--text-sub); line-height: 1.6;
             margin-bottom: 30px; text-align: center;
-            box-shadow: inset 2px 2px 5px var(--shadow-dark), inset -5px -5px 10px var(--shadow-light);
+            box-shadow: inset 3px 3px 6px var(--shadow-dark), inset -3px -3px 6px var(--shadow-light);
         }
-        .ftc-notice b { color: var(--primary-blue); }
 
         header { padding: 10px 0 35px; text-align: center; }
-        header h1 { font-size: 26px; font-weight: 900; margin: 0; letter-spacing: -1px; color: var(--text-main); }
+        header h1 { font-size: 26px; font-weight: 900; margin: 0; letter-spacing: -1px; }
         header h1 span { color: var(--primary-blue); }
 
         .section-box { margin-bottom: 40px; }
         .label { font-size: 12px; font-weight: 800; color: var(--text-sub); margin-bottom: 18px; display: block; text-transform: uppercase; letter-spacing: 1.5px; text-align: center; }
 
-        /* 입체형 카드 디자인 */
+        /* [1번 업그레이드] 입체형 카드 + 꾹 들어가는 애니메이션 */
         .card { 
-            background: var(--card-bg); border-radius: 25px; padding: 25px 20px;
-            margin-bottom: 20px; display: flex; flex-direction: column; align-items: center;
+            background: var(--bg-color); border-radius: 25px; padding: 25px 20px;
+            margin-bottom: 22px; display: flex; flex-direction: column; align-items: center;
             text-decoration: none; color: inherit; text-align: center;
             box-shadow: 8px 8px 16px var(--shadow-dark), -8px -8px 16px var(--shadow-light);
-            transition: all 0.2s ease;
+            transition: all 0.15s cubic-bezier(0.4, 0, 0.2, 1);
+            cursor: pointer; -webkit-tap-highlight-color: transparent;
         }
+        
+        /* 눌렀을 때 음각으로 변하는 효과 */
         .card:active { 
-            box-shadow: inset 4px 4px 8px var(--shadow-dark), inset -4px -4px 8px var(--shadow-light);
-            transform: scale(0.98);
+            box-shadow: inset 6px 6px 12px var(--shadow-dark), inset -6px -6px 12px var(--shadow-light);
+            transform: scale(0.97);
         }
 
         .icon-box { 
-            width: 64px; height: 64px; border-radius: 20px; overflow: hidden;
+            width: 68px; height: 68px; border-radius: 20px; overflow: hidden;
             background: #fff; margin-bottom: 15px;
             box-shadow: 4px 4px 8px var(--shadow-dark);
         }
@@ -61,28 +76,31 @@
         .text-area .main-t { display: block; font-size: 18px; font-weight: 800; }
         .text-area .sub-t { display: block; font-size: 12px; color: var(--text-sub); margin-top: 5px; }
 
-        /* 아이폰 가이드박스 */
+        /* 아이폰 가이드 (음각 박스) */
         .iphone-guide { 
-            background: var(--card-bg); border-radius: 25px; padding: 25px; margin-bottom: 35px;
-            box-shadow: inset 4px 4px 10px var(--shadow-dark), inset -4px -4px 10px var(--shadow-light);
+            background: var(--bg-color); border-radius: 25px; padding: 25px; margin-bottom: 35px;
+            box-shadow: inset 5px 5px 10px var(--shadow-dark), inset -5px -5px 10px var(--shadow-light);
         }
-        .guide-header { font-size: 16px; font-weight: 900; color: #e74c3c; margin-bottom: 20px; text-align: center; }
+        .guide-header { font-size: 16px; font-weight: 900; color: #ff4757; margin-bottom: 20px; text-align: center; }
         .chapter { margin-bottom: 15px; border-bottom: 1px solid rgba(0,0,0,0.03); padding-bottom: 12px; }
-        .chapter:last-child { border-bottom: none; margin-bottom: 0; }
         .chapter-title { font-size: 14px; font-weight: 800; display: block; margin-bottom: 5px; }
         .chapter-desc { font-size: 13px; color: var(--text-sub); line-height: 1.5; }
         .highlight { color: var(--primary-blue); font-weight: 800; }
 
-        /* 웹 버튼 그리드 */
+        /* 웹 버튼 그리드 + 클릭 효과 */
         .web-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; }
         .web-btn { 
-            background: var(--card-bg); padding: 18px; border-radius: 18px;
+            background: var(--bg-color); padding: 18px; border-radius: 18px;
             text-decoration: none; text-align: center; font-weight: 800; font-size: 14px; color: var(--text-main);
             box-shadow: 5px 5px 10px var(--shadow-dark), -5px -5px 10px var(--shadow-light);
+            transition: all 0.1s ease; -webkit-tap-highlight-color: transparent;
         }
-        .web-btn:active { box-shadow: inset 3px 3px 6px var(--shadow-dark), inset -3px -3px 6px var(--shadow-light); }
+        .web-btn:active { 
+            box-shadow: inset 3px 3px 6px var(--shadow-dark), inset -3px -3px 6px var(--shadow-light);
+            transform: scale(0.96);
+        }
 
-        /* 카카오톡 안내 레이어 */
+        /* 카카오톡 안내창 (기기별 최적화) */
         #kakaotalk-guide {
             display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
             background: rgba(240, 242, 245, 0.98); z-index: 10000; padding: 25px; box-sizing: border-box;
@@ -108,7 +126,7 @@
     </div>
 
     <header>
-        <h1>Smart <span>Gateway</span></h1>
+        <h1>Easy <span>Shortcut</span></h1>
     </header>
 
     <div class="section-box">
@@ -116,50 +134,50 @@
         <a href="intent://addshortcut?url=https://link.coupang.com/a/cpO0Kv&amp;icon=https://i.imgur.com/pKkM4Zm.png&amp;title=쿠팡&amp;serviceCode=whois&amp;version=11#Intent;scheme=naversearchapp;action=android.intent.action.VIEW;category=android.intent.category.BROWSABLE;package=com.nhn.android.search;end" class="card">
             <div class="icon-box"><img src="https://i.imgur.com/pKkM4Zm.png" alt="쿠팡"></div>
             <div class="text-area">
-                <span class="main-t">쿠팡 바로가기 설치</span>
-                <span class="sub-t">네이버 앱 연동 자동 생성</span>
+                <span class="main-t">쿠팡 바로가기</span>
+                <span class="sub-t">네이버 앱 연동 설치</span>
             </div>
         </a>
         <a href="intent://addshortcut?url=https://s.click.aliexpress.com/e/_DkmHcWJ&amp;icon=https://ae01.alicdn.com/kf/Hc7b2ba35dce542e99e9462915f23fa7cG.jpg_640x640Q90.jpg_.webp&amp;title=알리&amp;serviceCode=whois&amp;version=11#Intent;scheme=naversearchapp;action=android.intent.action.VIEW;category=android.intent.category.BROWSABLE;package=com.nhn.android.search;end" class="card">
             <div class="icon-box"><img src="https://ae01.alicdn.com/kf/Hc7b2ba35dce542e99e9462915f23fa7cG.jpg_640x640Q90.jpg_.webp" alt="알리"></div>
             <div class="text-area">
-                <span class="main-t">알리 바로가기 설치</span>
-                <span class="sub-t">네이버 앱 연동 자동 생성</span>
+                <span class="main-t">알리 바로가기</span>
+                <span class="sub-t">네이버 앱 연동 설치</span>
             </div>
         </a>
     </div>
 
     <div class="section-box">
-        <span class="label">Step 2. iPhone 전용 가이드</span>
+        <span class="label">Step 2. iPhone 수동 가이드</span>
         <div class="iphone-guide">
-            <div class="guide-header">🍎 iPhone 수동 설치</div>
-            <div class="chapter"><span class="chapter-title">1. 쇼핑몰 접속</span><span class="chapter-desc">[Step 3] 버튼으로 사이트에 먼저 접속하세요.</span></div>
-            <div class="chapter"><span class="chapter-title">2. 공유 메뉴</span><span class="chapter-desc">브라우저 하단의 <span class="highlight">[공유(↑)]</span> 아이콘을 누릅니다.</span></div>
-            <div class="chapter"><span class="chapter-title">3. 바탕화면 추가</span><span class="chapter-desc">리스트 하단의 <span class="highlight">[더 보기]</span> 내 <span class="highlight">[홈 화면에 추가]</span> 클릭!</span></div>
+            <div class="guide-header">🍎 iPhone 홈 화면 추가</div>
+            <div class="chapter"><span class="chapter-title">1. 쇼핑몰 접속</span><span class="chapter-desc">[Step 3] 버튼으로 사이트에 접속하세요.</span></div>
+            <div class="chapter"><span class="chapter-title">2. 공유 메뉴</span><span class="chapter-desc">브라우저 하단의 <span class="highlight">[공유(↑)]</span> 아이콘 클릭</span></div>
+            <div class="chapter"><span class="chapter-title">3. 바탕화면 추가</span><span class="chapter-desc"><span class="highlight">[더 보기]</span> 내의 <span class="highlight">[홈 화면에 추가]</span> 클릭</span></div>
         </div>
     </div>
 
     <div class="section-box">
-        <span class="label">Step 3. 직접 웹 접속</span>
+        <span class="label">Step 3. 즉시 웹 접속</span>
         <div class="web-grid">
-            <a href="https://link.coupang.com/a/cpO0Kv" class="web-btn" target="_blank">쿠팡 웹 접속</a>
-            <a href="https://s.click.aliexpress.com/e/_DkmHcWJ" class="web-btn" target="_blank">알리 웹 접속</a>
+            <a href="https://link.coupang.com/a/cpO0Kv" class="web-btn" target="_blank">쿠팡 웹</a>
+            <a href="https://s.click.aliexpress.com/e/_DkmHcWJ" class="web-btn" target="_blank">알리 웹</a>
         </div>
     </div>
 
     <div class="section-box">
-        <span class="label">Step 4. 필수 앱 설치</span>
+        <span class="label">Step 4. 필수 공식 앱</span>
         <a href="https://play.google.com/store/apps/details?id=com.nhn.android.search&hl=ko" class="card" style="padding:18px; flex-direction:row;">
-            <div class="icon-box" style="width:40px; height:40px; margin:0;"><img src="https://i.imgur.com/0M5jHW4.png"></div>
-            <div class="text-area" style="margin-left:15px; text-align:left;"><span class="main-t" style="font-size:15px;">네이버 앱</span></div>
+            <div class="icon-box" style="width:42px; height:42px; margin:0;"><img src="https://i.imgur.com/0M5jHW4.png"></div>
+            <div class="text-area" style="margin-left:15px; text-align:left;"><span class="main-t" style="font-size:15px;">네이버 앱 설치</span></div>
         </a>
         <a href="https://play.google.com/store/apps/details?id=com.coupang.mobile&hl=ko" class="card" style="padding:18px; flex-direction:row;">
-            <div class="icon-round" style="width:40px; height:40px; margin:0;"><img src="https://i.imgur.com/OvoXJTq.png" style="width:100%; border-radius:10px;"></div>
-            <div class="text-area" style="margin-left:15px; text-align:left;"><span class="main-t" style="font-size:15px;">쿠팡 앱</span></div>
+            <div class="icon-box" style="width:42px; height:42px; margin:0; border-radius:10px;"><img src="https://i.imgur.com/OvoXJTq.png"></div>
+            <div class="text-area" style="margin-left:15px; text-align:left;"><span class="main-t" style="font-size:15px;">쿠팡 공식 앱</span></div>
         </a>
         <a href="https://play.google.com/store/apps/details?id=com.alibaba.aliexpresshd&hl=ko" class="card" style="padding:18px; flex-direction:row;">
-            <div class="icon-round" style="width:40px; height:40px; margin:0;"><img src="https://ae01.alicdn.com/kf/Hc7b2ba35dce542e99e9462915f23fa7cG.jpg_640x640Q90.jpg_.webp" style="width:100%; border-radius:10px;"></div>
-            <div class="text-area" style="margin-left:15px; text-align:left;"><span class="main-t" style="font-size:15px;">알리 앱</span></div>
+            <div class="icon-box" style="width:42px; height:42px; margin:0; border-radius:10px;"><img src="https://ae01.alicdn.com/kf/Hc7b2ba35dce542e99e9462915f23fa7cG.jpg_640x640Q90.jpg_.webp"></div>
+            <div class="text-area" style="margin-left:15px; text-align:left;"><span class="main-t" style="font-size:15px;">알리 공식 앱</span></div>
         </a>
     </div>
 
@@ -178,10 +196,10 @@
             guide.style.justifyContent = 'center';
             if (isIos()) {
                 document.getElementById('kakao-arrow-down').style.display = 'block';
-                msg.innerHTML = "아이폰 카톡에서는<br>바로가기가 설치되지 않습니다.<br><br>오른쪽 하단 <b>[⋯]</b> 버튼을 눌러<br><b>'Safari로 열기'</b>를 선택하세요!";
+                msg.innerHTML = "아이폰 카톡에서는<br>바로가기가 설치되지 않습니다.<br><br>오른쪽 하단 <b>[⋯]</b> 또는 <b>[↑]</b>를 눌러<br><b>'Safari로 열기'</b>를 선택하세요!";
             } else {
                 document.getElementById('kakao-arrow-up').style.display = 'block';
-                msg.innerHTML = "안드로이드 카톡에서는<br>바로가기가 설치되지 않습니다.<br><br>오른쪽 상단 <b>[⋮]</b> 버튼을 눌러<br><b>'다른 브라우저로 열기'</b>를 선택하세요!";
+                msg.innerHTML = "안드로이드 카톡에서는<br>바로가기가 설치되지 않습니다.<br><br>오른쪽 상단 <b>[⋮]</b>을 눌러<br><b>'다른 브라우저로 열기'</b>를 선택하세요!";
             }
         }
     };

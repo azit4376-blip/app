@@ -43,42 +43,35 @@ function openExternalBrowser(url) {
     const schemeUrl = `kakaotalk://web/openExternal?url=${encoded}`;
     location.href = schemeUrl;
 
-    // 보조 시도
     setTimeout(() => {
       try { window.open(schemeUrl, "_self"); } catch {}
     }, 50);
+
     return;
   }
 
-  // Android: 네이버앱으로 고정
+  // Android: 네이버앱으로 "고정"
   if (isAndroid()) {
     const noProto = taggedUrl.replace(/^https?:\/\//, "");
 
-    // 네이버앱 패키지 고정
+    // 네이버앱 없을 때만 fallback으로 스토어로 이동시키기 (타임아웃 금지)
+    const playStoreNaver =
+      "https://play.google.com/store/apps/details?id=com.nhn.android.search&hl=ko";
+    const fallback = encodeURIComponent(playStoreNaver);
+
     const naverIntent =
       `intent://${noProto}` +
       `#Intent;scheme=https;action=android.intent.action.VIEW;` +
       `category=android.intent.category.BROWSABLE;` +
-      `package=com.nhn.android.search;end;`;
+      `package=com.nhn.android.search;` +
+      `S.browser_fallback_url=${fallback};` +
+      `end;`;
 
-    // 네이버앱 없을 때 대비: Play Store로 유도
-    const playStoreNaver =
-      "https://play.google.com/store/apps/details?id=com.nhn.android.search&hl=ko";
-
-    // 네이버앱 먼저 시도
     location.href = naverIntent;
-
-    // 만약 네이버앱이 없어서 아무 반응 없을 때, 일정 시간 후 스토어 이동 (실전형 타임아웃)
-    setTimeout(() => {
-      // 사용자가 이미 이동했으면 여기까지 안 올 가능성이 크지만,
-      // 안 됐을 때는 설치 유도라도 해주기
-      location.href = playStoreNaver;
-    }, 900);
-
     return;
   }
 
-  // 그 외(데스크탑 등): 그냥 새 탭
+  // 기타(데스크탑 등)
   window.open(taggedUrl, "_blank", "noopener");
 }
 

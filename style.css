@@ -4,8 +4,6 @@
   --primary: #6366f1;
   --primary-dark: #4f46e5;
   --secondary: #ec4899;
-  --success: #10b981;
-  --warning: #f59e0b;
   --bg-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
   --card-bg: #ffffff;
   --text-dark: #1f2937;
@@ -27,13 +25,8 @@ body {
   color: var(--text-dark);
 }
 
-.container {
-  max-width: 440px;
-  margin: 0 auto;
-  padding: 0 20px;
-}
+.container { max-width: 440px; margin: 0 auto; padding: 0 20px; }
 
-/* FTC 공지 */
 .ftc-notice {
   background: rgba(255, 255, 255, 0.95);
   backdrop-filter: blur(10px);
@@ -49,7 +42,6 @@ body {
 }
 .ftc-notice b { color: var(--text-dark); font-weight: 700; }
 
-/* 헤더 */
 header { text-align: center; padding: 20px 0 40px; }
 
 .logo {
@@ -65,11 +57,7 @@ header { text-align: center; padding: 20px 0 40px; }
   box-shadow: var(--shadow-lg);
   animation: float 3s ease-in-out infinite;
 }
-
-@keyframes float {
-  0%, 100% { transform: translateY(0px); }
-  50% { transform: translateY(-10px); }
-}
+@keyframes float { 0%, 100% { transform: translateY(0px); } 50% { transform: translateY(-10px); } }
 
 header h1 {
   font-size: 32px;
@@ -78,14 +66,8 @@ header h1 {
   margin-bottom: 8px;
   letter-spacing: -0.5px;
 }
+header p { color: rgba(255, 255, 255, 0.9); font-size: 15px; font-weight: 500; }
 
-header p {
-  color: rgba(255, 255, 255, 0.9);
-  font-size: 15px;
-  font-weight: 500;
-}
-
-/* 섹션 */
 .section { margin-bottom: 32px; }
 
 .section-title {
@@ -97,7 +79,6 @@ header p {
   font-weight: 700;
   font-size: 14px;
 }
-
 .section-title .badge {
   background: rgba(255, 255, 255, 0.25);
   padding: 6px 14px;
@@ -106,10 +87,8 @@ header p {
   font-weight: 700;
   letter-spacing: 0.5px;
 }
-
 .section-title .emoji { font-size: 20px; }
 
-/* 카드 스타일 */
 .card {
   background: var(--card-bg);
   border-radius: 20px;
@@ -122,17 +101,9 @@ header p {
   display: block;
   border: 1px solid rgba(255, 255, 255, 0.5);
 }
+.card:active { transform: scale(0.98); box-shadow: var(--shadow); }
 
-.card:active {
-  transform: scale(0.98);
-  box-shadow: var(--shadow);
-}
-
-.card-content {
-  display: flex;
-  align-items: center;
-  gap: 16px;
-}
+.card-content { display: flex; align-items: center; gap: 16px; }
 
 .card-icon {
   width: 56px;
@@ -145,42 +116,20 @@ header p {
   flex-shrink: 0;
   box-shadow: var(--shadow-sm);
 }
-
 .card-icon img { width: 32px; height: 32px; object-fit: contain; }
 
 .card-text { flex: 1; }
 
-.card-title {
-  font-size: 17px;
-  font-weight: 700;
-  color: var(--text-dark);
-  margin-bottom: 4px;
-}
-
-.card-desc {
-  font-size: 13px;
-  color: var(--text-gray);
-  font-weight: 500;
-}
-
+.card-title { font-size: 17px; font-weight: 700; color: var(--text-dark); margin-bottom: 4px; }
+.card-desc { font-size: 13px; color: var(--text-gray); font-weight: 500; }
 .card-arrow { font-size: 20px; color: var(--text-gray); opacity: 0.5; }
 
-/* 특수 카드 스타일 */
-.card-primary {
-  background: var(--bg-gradient);
-  color: white;
-}
+.card-primary { background: var(--bg-gradient); color: white; }
 .card-primary .card-title,
 .card-primary .card-desc { color: white; }
-
-.card-primary .card-icon {
-  background: rgba(255, 255, 255, 0.2);
-  backdrop-filter: blur(10px);
-}
-
+.card-primary .card-icon { background: rgba(255, 255, 255, 0.2); backdrop-filter: blur(10px); }
 .card-primary .card-arrow { color: white; opacity: 0.8; }
 
-/* 가이드 카드 */
 .guide-card {
   background: var(--card-bg);
   border-radius: 20px;
@@ -188,29 +137,15 @@ header p {
   box-shadow: var(--shadow-lg);
   border: 1px solid rgba(255, 255, 255, 0.5);
 }
-
 .guide-header {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  margin-bottom: 20px;
-  padding-bottom: 16px;
+  display: flex; align-items: center; gap: 10px;
+  margin-bottom: 20px; padding-bottom: 16px;
   border-bottom: 2px solid var(--border);
 }
-
 .guide-header .emoji { font-size: 28px; }
+.guide-header h3 { font-size: 18px; font-weight: 800; color: var(--text-dark); }
 
-.guide-header h3 {
-  font-size: 18px;
-  font-weight: 800;
-  color: var(--text-dark);
-}
-
-.guide-step {
-  margin-bottom: 16px;
-  padding-left: 12px;
-  border-left: 3px solid var(--primary);
-}
+.guide-step { margin-bottom: 16px; padding-left: 12px; border-left: 3px solid var(--primary); }
 .guide-step:last-child { margin-bottom: 0; }
 
 .step-number {
@@ -227,19 +162,8 @@ header p {
   margin-right: 8px;
   margin-left: -18px;
 }
-
-.step-title {
-  font-size: 15px;
-  font-weight: 700;
-  color: var(--text-dark);
-  margin-bottom: 6px;
-}
-
-.step-desc {
-  font-size: 13px;
-  color: var(--text-gray);
-  line-height: 1.6;
-}
+.step-title { font-size: 15px; font-weight: 700; color: var(--text-dark); margin-bottom: 6px; }
+.step-desc { font-size: 13px; color: var(--text-gray); line-height: 1.6; }
 
 .highlight {
   color: var(--primary);
@@ -249,12 +173,7 @@ header p {
   border-radius: 4px;
 }
 
-/* 그리드 버튼 */
-.button-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 12px;
-}
+.button-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
 
 .btn {
   background: var(--card-bg);
@@ -273,19 +192,15 @@ header p {
   align-items: center;
   gap: 8px;
 }
-
 .btn:active { transform: scale(0.96); box-shadow: var(--shadow-sm); }
-
 .btn-icon { font-size: 24px; }
 
-/* 앱 카드 - 작은 스타일 */
 .app-card { padding: 14px 16px; }
 .app-card .card-icon { width: 48px; height: 48px; border-radius: 12px; }
 .app-card .card-icon img { width: 28px; height: 28px; }
 .app-card .card-title { font-size: 15px; }
 .app-card .card-desc { font-size: 12px; }
 
-/* 카카오톡 가이드 */
 #kakaotalk-guide {
   display: none;
   position: fixed;
@@ -342,7 +257,6 @@ header p {
   transform: translateY(0);
   transition: transform 0.15s ease, box-shadow 0.15s ease, filter 0.15s ease;
 }
-
 .kakao-open-btn:active {
   transform: translateY(1px);
   box-shadow: 0 10px 22px rgba(0,0,0,0.18);
@@ -363,16 +277,11 @@ header p {
   color: #fee500;
   animation: bounce 1s ease-in-out infinite;
 }
-
 .arrow-up { top: -60px; right: 30px; }
 .arrow-down { bottom: -60px; right: 30px; }
 
-@keyframes bounce {
-  0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(-10px); }
-}
+@keyframes bounce { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-10px); } }
 
-/* 푸터 */
 .footer {
   text-align: center;
   padding: 40px 0 20px;
@@ -381,7 +290,6 @@ header p {
   font-weight: 500;
 }
 
-/* 반응형 */
 @media (max-width: 360px) {
   .container { padding: 0 16px; }
   header h1 { font-size: 28px; }

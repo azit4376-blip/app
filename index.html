@@ -1,691 +1,198 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <meta name="google-site-verification" content="u36-FtkXCnHJ3qi2akqjFoLQ2M7pudNXb6r19_hKcMg" />
-    
-    <title>Easy Shortcut - 스마트 쇼핑 바로가기</title>
-    <meta name="description" content="쿠팡, 알리익스프레스 등 주요 쇼핑몰 바로가기 아이콘을 홈 화면에 추가하고 간편하게 쇼핑하세요.">
-    <meta name="keywords" content="쇼핑 바로가기, 쿠팡 바로가기, 알리익스프레스, 홈화면 추가, 스마트 쇼핑">
-    <link rel="canonical" href="https://azit4376-blip.github.io/app/">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <meta name="google-site-verification" content="u36-FtkXCnHJ3qi2akqjFoLQ2M7pudNXb6r19_hKcMg" />
 
-    <meta property="og:type" content="website">
-    <meta property="og:title" content="Easy Shortcut - 스마트 쇼핑 바로가기">
-    <meta property="og:description" content="쇼핑몰 아이콘을 폰 바탕화면에 추가하세요!">
-    <meta property="og:image" content="https://www.google.com/s2/favicons?domain=coupang.com&sz=128">
-    <meta property="og:url" content="https://azit4376-blip.github.io/app/">
+  <title>Easy Shortcut - 스마트 쇼핑 바로가기</title>
+  <meta name="description" content="쿠팡, 알리익스프레스 등 주요 쇼핑몰 바로가기 아이콘을 홈 화면에 추가하고 간편하게 쇼핑하세요.">
+  <meta name="keywords" content="쇼핑 바로가기, 쿠팡 바로가기, 알리익스프레스, 홈화면 추가, 스마트 쇼핑">
+  <link rel="canonical" href="https://azit4376-blip.github.io/app/">
 
-    <style>
-        @import url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css');
-        
-        :root {
-            --primary: #6366f1;
-            --primary-dark: #4f46e5;
-            --secondary: #ec4899;
-            --success: #10b981;
-            --warning: #f59e0b;
-            --bg-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            --card-bg: #ffffff;
-            --text-dark: #1f2937;
-            --text-gray: #6b7280;
-            --border: #e5e7eb;
-            --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
-            --shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1);
-            --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1);
-            --shadow-xl: 0 20px 25px -5px rgb(0 0 0 / 0.1);
-        }
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Easy Shortcut - 스마트 쇼핑 바로가기">
+  <meta property="og:description" content="쇼핑몰 아이콘을 폰 바탕화면에 추가하세요!">
+  <meta property="og:image" content="https://www.google.com/s2/favicons?domain=coupang.com&sz=128">
+  <meta property="og:url" content="https://azit4376-blip.github.io/app/">
 
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-
-        body {
-            font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            min-height: 100vh;
-            padding: 20px 0;
-            color: var(--text-dark);
-        }
-
-        .container {
-            max-width: 440px;
-            margin: 0 auto;
-            padding: 0 20px;
-        }
-
-        /* FTC 공지 */
-        .ftc-notice {
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(10px);
-            border-radius: 16px;
-            padding: 14px 18px;
-            margin-bottom: 24px;
-            font-size: 11px;
-            color: var(--text-gray);
-            line-height: 1.6;
-            text-align: center;
-            box-shadow: var(--shadow);
-            border: 1px solid rgba(255, 255, 255, 0.3);
-        }
-        .ftc-notice b { color: var(--text-dark); font-weight: 700; }
-
-        /* 헤더 */
-        header { text-align: center; padding: 20px 0 40px; }
-
-        .logo {
-            background: var(--card-bg);
-            width: 80px;
-            height: 80px;
-            margin: 0 auto 20px;
-            border-radius: 24px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 36px;
-            box-shadow: var(--shadow-lg);
-            animation: float 3s ease-in-out infinite;
-        }
-        @keyframes float {
-            0%, 100% { transform: translateY(0px); }
-            50% { transform: translateY(-10px); }
-        }
-
-        header h1 {
-            font-size: 32px;
-            font-weight: 800;
-            color: white;
-            margin-bottom: 8px;
-            letter-spacing: -0.5px;
-        }
-        header p { color: rgba(255, 255, 255, 0.9); font-size: 15px; font-weight: 500; }
-
-        /* 섹션 */
-        .section { margin-bottom: 32px; }
-
-        .section-title {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            margin-bottom: 16px;
-            color: white;
-            font-weight: 700;
-            font-size: 14px;
-        }
-
-        .section-title .badge {
-            background: rgba(255, 255, 255, 0.25);
-            padding: 6px 14px;
-            border-radius: 20px;
-            font-size: 13px;
-            font-weight: 700;
-            letter-spacing: 0.5px;
-        }
-        .section-title .emoji { font-size: 20px; }
-
-        /* 카드 스타일 */
-        .card {
-            background: var(--card-bg);
-            border-radius: 20px;
-            padding: 20px;
-            margin-bottom: 12px;
-            box-shadow: var(--shadow-lg);
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-            text-decoration: none;
-            color: inherit;
-            display: block;
-            border: 1px solid rgba(255, 255, 255, 0.5);
-        }
-        .card:active { transform: scale(0.98); box-shadow: var(--shadow); }
-
-        .card-content { display: flex; align-items: center; gap: 16px; }
-
-        .card-icon {
-            width: 56px;
-            height: 56px;
-            border-radius: 16px;
-            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            flex-shrink: 0;
-            box-shadow: var(--shadow-sm);
-        }
-        .card-icon img { width: 32px; height: 32px; object-fit: contain; }
-
-        .card-text { flex: 1; }
-
-        .card-title { font-size: 17px; font-weight: 700; color: var(--text-dark); margin-bottom: 4px; }
-        .card-desc { font-size: 13px; color: var(--text-gray); font-weight: 500; }
-        .card-arrow { font-size: 20px; color: var(--text-gray); opacity: 0.5; }
-
-        /* 특수 카드 스타일 */
-        .card-primary {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-        }
-        .card-primary .card-title,
-        .card-primary .card-desc { color: white; }
-        .card-primary .card-icon {
-            background: rgba(255, 255, 255, 0.2);
-            backdrop-filter: blur(10px);
-        }
-        .card-primary .card-arrow { color: white; opacity: 0.8; }
-
-        /* 가이드 카드 */
-        .guide-card {
-            background: var(--card-bg);
-            border-radius: 20px;
-            padding: 24px;
-            box-shadow: var(--shadow-lg);
-            border: 1px solid rgba(255, 255, 255, 0.5);
-        }
-
-        .guide-header {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            margin-bottom: 20px;
-            padding-bottom: 16px;
-            border-bottom: 2px solid var(--border);
-        }
-        .guide-header .emoji { font-size: 28px; }
-        .guide-header h3 { font-size: 18px; font-weight: 800; color: var(--text-dark); }
-
-        .guide-step {
-            margin-bottom: 16px;
-            padding-left: 12px;
-            border-left: 3px solid var(--primary);
-        }
-        .guide-step:last-child { margin-bottom: 0; }
-
-        .step-number {
-            display: inline-block;
-            background: var(--primary);
-            color: white;
-            width: 24px;
-            height: 24px;
-            border-radius: 50%;
-            text-align: center;
-            line-height: 24px;
-            font-size: 12px;
-            font-weight: 700;
-            margin-right: 8px;
-            margin-left: -18px;
-        }
-
-        .step-title { font-size: 15px; font-weight: 700; color: var(--text-dark); margin-bottom: 6px; }
-        .step-desc { font-size: 13px; color: var(--text-gray); line-height: 1.6; }
-
-        .highlight {
-            color: var(--primary);
-            font-weight: 700;
-            background: rgba(99, 102, 241, 0.1);
-            padding: 2px 6px;
-            border-radius: 4px;
-        }
-
-        /* 그리드 버튼 */
-        .button-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 12px;
-        }
-
-        .btn {
-            background: var(--card-bg);
-            border: 2px solid var(--border);
-            border-radius: 16px;
-            padding: 18px;
-            text-align: center;
-            text-decoration: none;
-            font-weight: 700;
-            font-size: 15px;
-            color: var(--text-dark);
-            box-shadow: var(--shadow);
-            transition: all 0.2s ease;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 8px;
-        }
-        .btn:active { transform: scale(0.96); box-shadow: var(--shadow-sm); }
-        .btn-icon { font-size: 24px; }
-
-        /* 앱 카드 - 작은 스타일 */
-        .app-card { padding: 14px 16px; }
-        .app-card .card-icon { width: 48px; height: 48px; border-radius: 12px; }
-        .app-card .card-icon img { width: 28px; height: 28px; }
-        .app-card .card-title { font-size: 15px; }
-        .app-card .card-desc { font-size: 12px; }
-
-        /* 카카오톡 가이드 */
-        #kakaotalk-guide {
-            display: none;
-            position: fixed;
-            top: 0; left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.8);
-            backdrop-filter: blur(10px);
-            z-index: 10000;
-            align-items: center;
-            justify-content: center;
-            padding: 20px;
-        }
-
-        .kakao-content {
-            background: #fee500;
-            border-radius: 24px;
-            padding: 40px 30px;
-            max-width: 360px;
-            position: relative;
-            box-shadow: var(--shadow-xl);
-            text-align: center;
-        }
-
-        .kakao-icon { font-size: 64px; margin-bottom: 20px; }
-
-        .kakao-content h2 {
-            font-size: 22px;
-            font-weight: 800;
-            color: #3c1e1e;
-            margin-bottom: 16px;
-        }
-
-        .kakao-content p {
-            font-size: 15px;
-            color: #3c1e1e;
-            line-height: 1.8;
-            font-weight: 600;
-        }
-
-        .arrow {
-            position: absolute;
-            font-size: 40px;
-            color: #fee500;
-            animation: bounce 1s ease-in-out infinite;
-        }
-        .arrow-up { top: -60px; right: 30px; }
-        .arrow-down { bottom: -60px; right: 30px; }
-
-        @keyframes bounce {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-10px); }
-        }
-
-        /* 푸터 */
-        .footer {
-            text-align: center;
-            padding: 40px 0 20px;
-            color: rgba(255, 255, 255, 0.7);
-            font-size: 12px;
-            font-weight: 500;
-        }
-
-        /* 반응형 */
-        @media (max-width: 360px) {
-            .container { padding: 0 16px; }
-            header h1 { font-size: 28px; }
-            .card-title { font-size: 16px; }
-        }
-    </style>
+  <link rel="stylesheet" href="style.css">
+  <script src="app.js" defer></script>
 </head>
+
 <body>
-
-<!-- 카카오톡 가이드 오버레이 -->
-<div id="kakaotalk-guide">
+  <!-- 카카오톡 가이드 오버레이 -->
+  <div id="kakaotalk-guide" aria-hidden="true">
     <div id="arrow-container">
-        <div id="kakao-arrow-up" class="arrow arrow-up">↑</div>
-        <div class="kakao-content">
-            <div class="kakao-icon">💬</div>
-            <div id="kakao-msg"></div>
-        </div>
-        <div id="kakao-arrow-down" class="arrow arrow-down">↓</div>
-    </div>
-</div>
+      <div id="kakao-arrow-up" class="arrow arrow-up">↑</div>
 
-<div class="container">
+      <div class="kakao-content" role="dialog" aria-modal="true" aria-labelledby="kakao-title">
+        <div class="kakao-icon">💬</div>
+
+        <div id="kakao-msg">
+          <h2 id="kakao-title"></h2>
+          <p id="kakao-desc"></p>
+
+          <button id="open-ext-btn" class="kakao-open-btn" type="button"></button>
+
+          <div class="kakao-subnote" id="kakao-subnote"></div>
+        </div>
+      </div>
+
+      <div id="kakao-arrow-down" class="arrow arrow-down">↓</div>
+    </div>
+  </div>
+
+  <div class="container">
     <!-- FTC 공지 -->
     <div class="ftc-notice">
-        <b>📢 안내</b> 본 페이지는 <b>쿠팡 파트너스, 네이버 브랜드커넥트, 알리익스프레스 어필리에이트</b> 활동의 일환으로 수수료가 지급될 수 있습니다.
+      <b>📢 안내</b> 본 페이지는 <b>쿠팡 파트너스, 네이버 브랜드커넥트, 알리익스프레스 어필리에이트</b> 활동의 일환으로 수수료가 지급될 수 있습니다.
     </div>
 
     <!-- 헤더 -->
     <header>
-        <div class="logo">🛍️</div>
-        <h1>Easy Shortcut</h1>
-        <p>한 번의 클릭으로 쇼핑 시작</p>
+      <div class="logo">🛍️</div>
+      <h1>Easy Shortcut</h1>
+      <p>한 번의 클릭으로 쇼핑 시작</p>
     </header>
 
-    <!-- 안드로이드 바로가기 -->
+    <!-- 안드로이드 바로가기 (카톡에서는 숨김 처리됨) -->
     <div class="section" id="step1-android">
-        <div class="section-title">
-            <span class="badge">STEP 1</span>
-            <span class="emoji">📱</span>
-            <span>Android 바로가기</span>
-        </div>
-        
-        <a href="intent://addshortcut?url=https://link.coupang.com/a/cpO0Kv&icon=https://www.google.com/s2/favicons?domain=coupang.com&sz=64&title=쿠팡&serviceCode=whois&version=11#Intent;scheme=naversearchapp;action=android.intent.action.VIEW;category=android.intent.category.BROWSABLE;package=com.nhn.android.search;end" class="card card-primary">
-            <div class="card-content">
-                <div class="card-icon">
-                    <img src="https://www.google.com/s2/favicons?domain=coupang.com&sz=64" alt="쿠팡">
-                </div>
-                <div class="card-text">
-                    <div class="card-title">쿠팡 바로가기 추가</div>
-                    <div class="card-desc">홈 화면에 쿠팡 아이콘 설치</div>
-                </div>
-                <div class="card-arrow">→</div>
-            </div>
-        </a>
+      <div class="section-title">
+        <span class="badge">STEP 1</span>
+        <span class="emoji">📱</span>
+        <span>Android 바로가기</span>
+      </div>
 
-        <a href="intent://addshortcut?url=https://s.click.aliexpress.com/e/_DkmHcWJ&icon=https://www.google.com/s2/favicons?domain=aliexpress.com&sz=64&title=알리&serviceCode=whois&version=11#Intent;scheme=naversearchapp;action=android.intent.action.VIEW;category=android.intent.category.BROWSABLE;package=com.nhn.android.search;end" class="card">
-            <div class="card-content">
-                <div class="card-icon">
-                    <img src="https://www.google.com/s2/favicons?domain=aliexpress.com&sz=64" alt="알리">
-                </div>
-                <div class="card-text">
-                    <div class="card-title">알리익스프레스 바로가기 추가</div>
-                    <div class="card-desc">홈 화면에 알리 아이콘 설치</div>
-                </div>
-                <div class="card-arrow">→</div>
-            </div>
-        </a>
+      <a href="intent://addshortcut?url=https://link.coupang.com/a/cpO0Kv&icon=https://www.google.com/s2/favicons?domain=coupang.com&sz=64&title=쿠팡&serviceCode=whois&version=11#Intent;scheme=naversearchapp;action=android.intent.action.VIEW;category=android.intent.category.BROWSABLE;package=com.nhn.android.search;end"
+         class="card card-primary">
+        <div class="card-content">
+          <div class="card-icon">
+            <img src="https://www.google.com/s2/favicons?domain=coupang.com&sz=64" alt="쿠팡">
+          </div>
+          <div class="card-text">
+            <div class="card-title">쿠팡 바로가기 추가</div>
+            <div class="card-desc">홈 화면에 쿠팡 아이콘 설치</div>
+          </div>
+          <div class="card-arrow">→</div>
+        </div>
+      </a>
+
+      <a href="intent://addshortcut?url=https://s.click.aliexpress.com/e/_DkmHcWJ&icon=https://www.google.com/s2/favicons?domain=aliexpress.com&sz=64&title=알리&serviceCode=whois&version=11#Intent;scheme=naversearchapp;action=android.intent.action.VIEW;category=android.intent.category.BROWSABLE;package=com.nhn.android.search;end"
+         class="card">
+        <div class="card-content">
+          <div class="card-icon">
+            <img src="https://www.google.com/s2/favicons?domain=aliexpress.com&sz=64" alt="알리">
+          </div>
+          <div class="card-text">
+            <div class="card-title">알리익스프레스 바로가기 추가</div>
+            <div class="card-desc">홈 화면에 알리 아이콘 설치</div>
+          </div>
+          <div class="card-arrow">→</div>
+        </div>
+      </a>
     </div>
 
     <!-- iPhone 가이드 -->
     <div class="section">
-        <div class="section-title">
-            <span class="badge">STEP 2</span>
-            <span class="emoji">🍎</span>
-            <span>iPhone 설치 가이드</span>
-        </div>
-        
-        <div class="guide-card">
-            <div class="guide-header">
-                <span class="emoji">📌</span>
-                <h3>홈 화면에 추가하는 방법</h3>
-            </div>
-            
-            <div class="guide-step">
-                <div class="step-title">
-                    <span class="step-number">1</span>
-                    쇼핑몰 사이트 접속
-                </div>
-                <div class="step-desc">
-                    아래 <span class="highlight">Step 3</span>에서 원하는 쇼핑몰 버튼을 클릭하세요
-                </div>
-            </div>
+      <div class="section-title">
+        <span class="badge">STEP 2</span>
+        <span class="emoji">🍎</span>
+        <span>iPhone 설치 가이드</span>
+      </div>
 
-            <div class="guide-step">
-                <div class="step-title">
-                    <span class="step-number">2</span>
-                    공유 메뉴 열기
-                </div>
-                <div class="step-desc">
-                    Safari 하단의 <span class="highlight">공유 (↑)</span> 아이콘을 탭하세요
-                </div>
-            </div>
-
-            <div class="guide-step">
-                <div class="step-title">
-                    <span class="step-number">3</span>
-                    홈 화면에 추가
-                </div>
-                <div class="step-desc">
-                    스크롤해서 <span class="highlight">홈 화면에 추가</span>를 선택하고 완료를 누르세요
-                </div>
-            </div>
+      <div class="guide-card">
+        <div class="guide-header">
+          <span class="emoji">📌</span>
+          <h3>홈 화면에 추가하는 방법</h3>
         </div>
+
+        <div class="guide-step">
+          <div class="step-title"><span class="step-number">1</span>쇼핑몰 사이트 접속</div>
+          <div class="step-desc">아래 <span class="highlight">Step 3</span>에서 원하는 쇼핑몰 버튼을 클릭하세요</div>
+        </div>
+
+        <div class="guide-step">
+          <div class="step-title"><span class="step-number">2</span>공유 메뉴 열기</div>
+          <div class="step-desc">Safari 하단의 <span class="highlight">공유 (↑)</span> 아이콘을 탭하세요</div>
+        </div>
+
+        <div class="guide-step">
+          <div class="step-title"><span class="step-number">3</span>홈 화면에 추가</div>
+          <div class="step-desc">스크롤해서 <span class="highlight">홈 화면에 추가</span>를 선택하고 완료를 누르세요</div>
+        </div>
+      </div>
     </div>
 
     <!-- 즉시 웹 접속 -->
     <div class="section">
-        <div class="section-title" id="step3-title">
-            <span class="badge">STEP 3</span>
-            <span class="emoji">🌐</span>
-            <span>바로 쇼핑하기</span>
-        </div>
-        
-        <div class="button-grid">
-            <a href="https://link.coupang.com/a/cpO0Kv" class="btn" target="_blank">
-                <span class="btn-icon">🛒</span>
-                쿠팡 웹
-            </a>
-            <a href="https://s.click.aliexpress.com/e/_DkmHcWJ" class="btn" target="_blank">
-                <span class="btn-icon">🌏</span>
-                알리 웹
-            </a>
-        </div>
+      <div class="section-title" id="step3-title">
+        <span class="badge">STEP 3</span>
+        <span class="emoji">🌐</span>
+        <span id="step3-title-text">바로 쇼핑하기</span>
+      </div>
+
+      <div class="button-grid">
+        <a href="https://link.coupang.com/a/cpO0Kv" class="btn" target="_blank" rel="noopener">
+          <span class="btn-icon">🛒</span>
+          쿠팡 웹
+        </a>
+        <a href="https://s.click.aliexpress.com/e/_DkmHcWJ" class="btn" target="_blank" rel="noopener">
+          <span class="btn-icon">🌏</span>
+          알리 웹
+        </a>
+      </div>
     </div>
 
     <!-- 공식 앱 -->
     <div class="section">
-        <div class="section-title">
-            <span class="badge">STEP 4</span>
-            <span class="emoji">📲</span>
-            <span>공식 앱 다운로드</span>
-        </div>
-        
-        <a href="https://play.google.com/store/apps/details?id=com.nhn.android.search&hl=ko" class="card app-card">
-            <div class="card-content">
-                <div class="card-icon">
-                    <img src="https://www.google.com/s2/favicons?domain=naver.com&sz=64" alt="네이버">
-                </div>
-                <div class="card-text">
-                    <div class="card-title">네이버 앱</div>
-                    <div class="card-desc">바로가기 기능 필수</div>
-                </div>
-                <div class="card-arrow">→</div>
-            </div>
-        </a>
-
-        <a href="https://play.google.com/store/apps/details?id=com.coupang.mobile&hl=ko" class="card app-card">
-            <div class="card-content">
-                <div class="card-icon">
-                    <img src="https://www.google.com/s2/favicons?domain=coupang.com&sz=64" alt="쿠팡">
-                </div>
-                <div class="card-text">
-                    <div class="card-title">쿠팡 앱</div>
-                    <div class="card-desc">더 빠른 쇼핑</div>
-                </div>
-                <div class="card-arrow">→</div>
-            </div>
-        </a>
-
-        <a href="https://play.google.com/store/apps/details?id=com.alibaba.aliexpresshd&hl=ko" class="card app-card">
-            <div class="card-content">
-                <div class="card-icon">
-                    <img src="https://www.google.com/s2/favicons?domain=aliexpress.com&sz=64" alt="알리">
-                </div>
-                <div class="card-text">
-                    <div class="card-title">알리익스프레스 앱</div>
-                    <div class="card-desc">글로벌 쇼핑</div>
-                </div>
-                <div class="card-arrow">→</div>
-            </div>
-        </a>
-    </div>
-
-    <!-- 푸터 -->
-    <div class="footer">
-        © 2026 SHOPPING GATE MANAGER
-    </div>
-</div>
-
-<script>
-  // ─────────────────────────────────────────
-  // UA / Params
-  // ─────────────────────────────────────────
-  function isKakaotalk() { return /KAKAOTALK/i.test(navigator.userAgent); }
-  function isIos() { return /iPhone|iPad|iPod/i.test(navigator.userAgent); }
-
-  function getParam(name) {
-    try { return new URL(location.href).searchParams.get(name); }
-    catch (e) { return null; }
-  }
-
-  function addOrUpdateParam(url, key, value) {
-    try {
-      const u = new URL(url);
-      u.searchParams.set(key, value);
-      return u.toString();
-    } catch (e) {
-      const glue = url.includes("?") ? "&" : "?";
-      return url + glue + encodeURIComponent(key) + "=" + encodeURIComponent(value);
-    }
-  }
-
-  // ─────────────────────────────────────────
-  // Open external (Android: Naver App first)
-  // ─────────────────────────────────────────
-  function openExternalBrowser(url) {
-    const taggedUrl = addOrUpdateParam(url, "openExternal", "1");
-    const encoded = encodeURIComponent(taggedUrl);
-
-    // iOS: 사파리로 열기 best-effort (성공하면 바로 넘어감)
-    if (isIos()) {
-      const schemeUrl = `kakaotalk://web/openExternal?url=${encoded}`;
-
-      // 1) location 이동
-      location.href = schemeUrl;
-
-      // 2) 보조 시도 (일부 환경에서 1)이 막히면 이게 먹는 케이스가 있음)
-      setTimeout(() => {
-        try { window.open(schemeUrl, "_self"); } catch (e) {}
-      }, 50);
-
-      return;
-    }
-
-    // Android (네이버앱 우선, 크롬 fallback) - 기존 그대로
-    const noProto = taggedUrl.replace(/^https?:\/\//, "");
-
-    const naverIntent =
-      `intent://${noProto}` +
-      `#Intent;scheme=https;action=android.intent.action.VIEW;` +
-      `category=android.intent.category.BROWSABLE;` +
-      `package=com.nhn.android.search;end;`;
-
-    const chromeIntent =
-      `intent://${noProto}` +
-      `#Intent;scheme=https;package=com.android.chrome;end;`;
-
-    location.href = naverIntent;
-    setTimeout(() => { location.href = chromeIntent; }, 700);
-  }
-
-  // ─────────────────────────────────────────
-  // UI patch
-  // ─────────────────────────────────────────
-  function hideStep1ForKakao() {
-    const step1 = document.getElementById("step1-android");
-    if (step1) step1.style.display = "none";
-
-    // Step3 제목 문구 살짝 변경(카톡에서만)
-    const step3Title = document.getElementById("step3-title");
-    if (step3Title) {
-      const spans = step3Title.querySelectorAll("span");
-      // 마지막 텍스트 span
-      if (spans && spans.length) spans[spans.length - 1].textContent = "바로 쇼핑하기 (네이버앱 권장)";
-    }
-  }
-
-  function closeKakaoOverlayIfAny() {
-    const guide = document.getElementById("kakaotalk-guide");
-    if (guide) guide.style.display = "none";
-  }
-
-  function showKakaoOverlay() {
-    const guide = document.getElementById("kakaotalk-guide");
-    const msg = document.getElementById("kakao-msg");
-    if (!guide || !msg) return;
-
-    // 화살표 OS별 표시
-    const up = document.getElementById("kakao-arrow-up");
-    const down = document.getElementById("kakao-arrow-down");
-    if (up) up.style.display = isIos() ? "none" : "block";
-    if (down) down.style.display = isIos() ? "block" : "none";
-
-    const btnText = isIos() ? "Safari로 열기" : "네이버앱으로 열기";
-    const subHint = isIos()
-      ? "안 열리면 오른쪽 하단 [⋯] → 'Safari로 열기'"
-      : "안 열리면 오른쪽 하단 [⋮] → '다른 브라우저로 열기'";
-
-    msg.innerHTML = `
-      <h2 style="margin-bottom:10px;">${isIos() ? "🍎 iPhone 카카오톡 안내" : "📱 Android 카카오톡 안내"}</h2>
-      <p style="margin-bottom:14px;">
-        카카오톡 내부에서는 <b>바로가기 설치</b>가 제한될 수 있어요.<br><br>
-        아래 버튼으로 <b>외부 브라우저</b>에서 열면 정상적으로 설치됩니다.
-        <br><span style="font-size:12px; opacity:0.85;">(${subHint})</span>
-      </p>
-
-      <button id="open-ext-btn" style="
-        width:100%;
-        border:none;
-        border-radius:18px;
-        padding:14px 16px;
-        font-weight:900;
-        font-size:15px;
-        cursor:pointer;
-        color:white;
-        letter-spacing:-0.2px;
-        background: linear-gradient(135deg, #6366f1 0%, #4f46e5 45%, #ec4899 100%);
-        box-shadow: 0 14px 30px rgba(0,0,0,0.22);
-        transform: translateY(0);
-        transition: transform 0.15s ease, box-shadow 0.15s ease, filter 0.15s ease;
-      ">
-        ${btnText} 🚀
-      </button>
-
-      <div style="margin-top:12px; font-size:12px; color:#3c1e1e; opacity:0.9; font-weight:700;">
-        ✅ 외부에서 열면 STEP 1(바로가기 추가) 버튼이 활성화됩니다.
+      <div class="section-title">
+        <span class="badge">STEP 4</span>
+        <span class="emoji">📲</span>
+        <span>공식 앱 다운로드</span>
       </div>
-    `;
 
-    const btn = document.getElementById("open-ext-btn");
-    if (btn) {
-      btn.addEventListener("touchstart", () => {
-        btn.style.transform = "translateY(1px)";
-        btn.style.boxShadow = "0 10px 22px rgba(0,0,0,0.18)";
-        btn.style.filter = "brightness(0.98)";
-      }, { passive: true });
+      <a href="https://play.google.com/store/apps/details?id=com.nhn.android.search&hl=ko" class="card app-card">
+        <div class="card-content">
+          <div class="card-icon">
+            <img src="https://www.google.com/s2/favicons?domain=naver.com&sz=64" alt="네이버">
+          </div>
+          <div class="card-text">
+            <div class="card-title">네이버 앱</div>
+            <div class="card-desc">바로가기 기능 필수</div>
+          </div>
+          <div class="card-arrow">→</div>
+        </div>
+      </a>
 
-      btn.addEventListener("touchend", () => {
-        btn.style.transform = "translateY(0)";
-        btn.style.boxShadow = "0 14px 30px rgba(0,0,0,0.22)";
-        btn.style.filter = "brightness(1)";
-      }, { passive: true });
+      <a href="https://play.google.com/store/apps/details?id=com.coupang.mobile&hl=ko" class="card app-card">
+        <div class="card-content">
+          <div class="card-icon">
+            <img src="https://www.google.com/s2/favicons?domain=coupang.com&sz=64" alt="쿠팡">
+          </div>
+          <div class="card-text">
+            <div class="card-title">쿠팡 앱</div>
+            <div class="card-desc">더 빠른 쇼핑</div>
+          </div>
+          <div class="card-arrow">→</div>
+        </div>
+      </a>
 
-      btn.onclick = () => openExternalBrowser(location.href);
-    }
+      <a href="https://play.google.com/store/apps/details?id=com.alibaba.aliexpresshd&hl=ko" class="card app-card">
+        <div class="card-content">
+          <div class="card-icon">
+            <img src="https://www.google.com/s2/favicons?domain=aliexpress.com&sz=64" alt="알리">
+          </div>
+          <div class="card-text">
+            <div class="card-title">알리익스프레스 앱</div>
+            <div class="card-desc">글로벌 쇼핑</div>
+          </div>
+          <div class="card-arrow">→</div>
+        </div>
+      </a>
+    </div>
 
-    guide.style.display = "flex";
-
-    // 배경 클릭 시 닫기(원치 않으면 삭제)
-    guide.addEventListener("click", (e) => {
-      if (e.target && e.target.closest && e.target.closest(".kakao-content")) return;
-      guide.style.display = "none";
-    }, { once: true });
-  }
-
-  // ─────────────────────────────────────────
-  // Boot
-  // ─────────────────────────────────────────
-  window.addEventListener("load", function() {
-    const openedExternal = getParam("openExternal") === "1";
-
-    // 외부 브라우저로 다시 열린 경우: 오버레이 자동 닫기(또는 표시 안 함)
-    if (openedExternal) {
-      closeKakaoOverlayIfAny();
-      return;
-    }
-
-    // 카톡 인앱일 때만: Step1 숨김 + 오버레이 띄우기
-    if (isKakaotalk()) {
-      hideStep1ForKakao();
-      showKakaoOverlay();
-    }
-  });
-</script>
-
+    <div class="footer">© 2026 SHOPPING GATE MANAGER</div>
+  </div>
 </body>
 </html>

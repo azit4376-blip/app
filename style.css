@@ -1,0 +1,389 @@
+@import url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css');
+
+:root {
+  --primary: #6366f1;
+  --primary-dark: #4f46e5;
+  --secondary: #ec4899;
+  --success: #10b981;
+  --warning: #f59e0b;
+  --bg-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  --card-bg: #ffffff;
+  --text-dark: #1f2937;
+  --text-gray: #6b7280;
+  --border: #e5e7eb;
+  --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+  --shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1);
+  --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1);
+  --shadow-xl: 0 20px 25px -5px rgb(0 0 0 / 0.1);
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+  font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+  background: var(--bg-gradient);
+  min-height: 100vh;
+  padding: 20px 0;
+  color: var(--text-dark);
+}
+
+.container {
+  max-width: 440px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+/* FTC 공지 */
+.ftc-notice {
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(10px);
+  border-radius: 16px;
+  padding: 14px 18px;
+  margin-bottom: 24px;
+  font-size: 11px;
+  color: var(--text-gray);
+  line-height: 1.6;
+  text-align: center;
+  box-shadow: var(--shadow);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+}
+.ftc-notice b { color: var(--text-dark); font-weight: 700; }
+
+/* 헤더 */
+header { text-align: center; padding: 20px 0 40px; }
+
+.logo {
+  background: var(--card-bg);
+  width: 80px;
+  height: 80px;
+  margin: 0 auto 20px;
+  border-radius: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 36px;
+  box-shadow: var(--shadow-lg);
+  animation: float 3s ease-in-out infinite;
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-10px); }
+}
+
+header h1 {
+  font-size: 32px;
+  font-weight: 800;
+  color: white;
+  margin-bottom: 8px;
+  letter-spacing: -0.5px;
+}
+
+header p {
+  color: rgba(255, 255, 255, 0.9);
+  font-size: 15px;
+  font-weight: 500;
+}
+
+/* 섹션 */
+.section { margin-bottom: 32px; }
+
+.section-title {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 16px;
+  color: white;
+  font-weight: 700;
+  font-size: 14px;
+}
+
+.section-title .badge {
+  background: rgba(255, 255, 255, 0.25);
+  padding: 6px 14px;
+  border-radius: 20px;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+}
+
+.section-title .emoji { font-size: 20px; }
+
+/* 카드 스타일 */
+.card {
+  background: var(--card-bg);
+  border-radius: 20px;
+  padding: 20px;
+  margin-bottom: 12px;
+  box-shadow: var(--shadow-lg);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  text-decoration: none;
+  color: inherit;
+  display: block;
+  border: 1px solid rgba(255, 255, 255, 0.5);
+}
+
+.card:active {
+  transform: scale(0.98);
+  box-shadow: var(--shadow);
+}
+
+.card-content {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.card-icon {
+  width: 56px;
+  height: 56px;
+  border-radius: 16px;
+  background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  box-shadow: var(--shadow-sm);
+}
+
+.card-icon img { width: 32px; height: 32px; object-fit: contain; }
+
+.card-text { flex: 1; }
+
+.card-title {
+  font-size: 17px;
+  font-weight: 700;
+  color: var(--text-dark);
+  margin-bottom: 4px;
+}
+
+.card-desc {
+  font-size: 13px;
+  color: var(--text-gray);
+  font-weight: 500;
+}
+
+.card-arrow { font-size: 20px; color: var(--text-gray); opacity: 0.5; }
+
+/* 특수 카드 스타일 */
+.card-primary {
+  background: var(--bg-gradient);
+  color: white;
+}
+.card-primary .card-title,
+.card-primary .card-desc { color: white; }
+
+.card-primary .card-icon {
+  background: rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(10px);
+}
+
+.card-primary .card-arrow { color: white; opacity: 0.8; }
+
+/* 가이드 카드 */
+.guide-card {
+  background: var(--card-bg);
+  border-radius: 20px;
+  padding: 24px;
+  box-shadow: var(--shadow-lg);
+  border: 1px solid rgba(255, 255, 255, 0.5);
+}
+
+.guide-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 20px;
+  padding-bottom: 16px;
+  border-bottom: 2px solid var(--border);
+}
+
+.guide-header .emoji { font-size: 28px; }
+
+.guide-header h3 {
+  font-size: 18px;
+  font-weight: 800;
+  color: var(--text-dark);
+}
+
+.guide-step {
+  margin-bottom: 16px;
+  padding-left: 12px;
+  border-left: 3px solid var(--primary);
+}
+.guide-step:last-child { margin-bottom: 0; }
+
+.step-number {
+  display: inline-block;
+  background: var(--primary);
+  color: white;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  text-align: center;
+  line-height: 24px;
+  font-size: 12px;
+  font-weight: 700;
+  margin-right: 8px;
+  margin-left: -18px;
+}
+
+.step-title {
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--text-dark);
+  margin-bottom: 6px;
+}
+
+.step-desc {
+  font-size: 13px;
+  color: var(--text-gray);
+  line-height: 1.6;
+}
+
+.highlight {
+  color: var(--primary);
+  font-weight: 700;
+  background: rgba(99, 102, 241, 0.1);
+  padding: 2px 6px;
+  border-radius: 4px;
+}
+
+/* 그리드 버튼 */
+.button-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+
+.btn {
+  background: var(--card-bg);
+  border: 2px solid var(--border);
+  border-radius: 16px;
+  padding: 18px;
+  text-align: center;
+  text-decoration: none;
+  font-weight: 700;
+  font-size: 15px;
+  color: var(--text-dark);
+  box-shadow: var(--shadow);
+  transition: all 0.2s ease;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+}
+
+.btn:active { transform: scale(0.96); box-shadow: var(--shadow-sm); }
+
+.btn-icon { font-size: 24px; }
+
+/* 앱 카드 - 작은 스타일 */
+.app-card { padding: 14px 16px; }
+.app-card .card-icon { width: 48px; height: 48px; border-radius: 12px; }
+.app-card .card-icon img { width: 28px; height: 28px; }
+.app-card .card-title { font-size: 15px; }
+.app-card .card-desc { font-size: 12px; }
+
+/* 카카오톡 가이드 */
+#kakaotalk-guide {
+  display: none;
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.8);
+  backdrop-filter: blur(10px);
+  z-index: 10000;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+}
+
+.kakao-content {
+  background: #fee500;
+  border-radius: 24px;
+  padding: 40px 30px;
+  max-width: 360px;
+  position: relative;
+  box-shadow: var(--shadow-xl);
+  text-align: center;
+}
+
+.kakao-icon { font-size: 64px; margin-bottom: 20px; }
+
+#kakao-title {
+  font-size: 22px;
+  font-weight: 900;
+  color: #3c1e1e;
+  margin-bottom: 12px;
+}
+
+#kakao-desc {
+  font-size: 15px;
+  color: #3c1e1e;
+  line-height: 1.8;
+  font-weight: 700;
+  margin-bottom: 14px;
+}
+
+.kakao-open-btn {
+  width: 100%;
+  border: none;
+  border-radius: 18px;
+  padding: 14px 16px;
+  font-weight: 900;
+  font-size: 15px;
+  cursor: pointer;
+  color: white;
+  letter-spacing: -0.2px;
+  background: linear-gradient(135deg, #6366f1 0%, #4f46e5 45%, #ec4899 100%);
+  box-shadow: 0 14px 30px rgba(0,0,0,0.22);
+  transform: translateY(0);
+  transition: transform 0.15s ease, box-shadow 0.15s ease, filter 0.15s ease;
+}
+
+.kakao-open-btn:active {
+  transform: translateY(1px);
+  box-shadow: 0 10px 22px rgba(0,0,0,0.18);
+  filter: brightness(0.98);
+}
+
+.kakao-subnote {
+  margin-top: 12px;
+  font-size: 12px;
+  color: #3c1e1e;
+  opacity: 0.9;
+  font-weight: 800;
+}
+
+.arrow {
+  position: absolute;
+  font-size: 40px;
+  color: #fee500;
+  animation: bounce 1s ease-in-out infinite;
+}
+
+.arrow-up { top: -60px; right: 30px; }
+.arrow-down { bottom: -60px; right: 30px; }
+
+@keyframes bounce {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
+
+/* 푸터 */
+.footer {
+  text-align: center;
+  padding: 40px 0 20px;
+  color: rgba(255, 255, 255, 0.7);
+  font-size: 12px;
+  font-weight: 500;
+}
+
+/* 반응형 */
+@media (max-width: 360px) {
+  .container { padding: 0 16px; }
+  header h1 { font-size: 28px; }
+  .card-title { font-size: 16px; }
+}

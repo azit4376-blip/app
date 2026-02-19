@@ -36,11 +36,7 @@
             --shadow-xl: 0 20px 25px -5px rgb(0 0 0 / 0.1);
         }
 
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
 
         body {
             font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
@@ -70,17 +66,10 @@
             box-shadow: var(--shadow);
             border: 1px solid rgba(255, 255, 255, 0.3);
         }
-
-        .ftc-notice b {
-            color: var(--text-dark);
-            font-weight: 700;
-        }
+        .ftc-notice b { color: var(--text-dark); font-weight: 700; }
 
         /* 헤더 */
-        header {
-            text-align: center;
-            padding: 20px 0 40px;
-        }
+        header { text-align: center; padding: 20px 0 40px; }
 
         .logo {
             background: var(--card-bg);
@@ -95,7 +84,6 @@
             box-shadow: var(--shadow-lg);
             animation: float 3s ease-in-out infinite;
         }
-
         @keyframes float {
             0%, 100% { transform: translateY(0px); }
             50% { transform: translateY(-10px); }
@@ -108,17 +96,10 @@
             margin-bottom: 8px;
             letter-spacing: -0.5px;
         }
-
-        header p {
-            color: rgba(255, 255, 255, 0.9);
-            font-size: 15px;
-            font-weight: 500;
-        }
+        header p { color: rgba(255, 255, 255, 0.9); font-size: 15px; font-weight: 500; }
 
         /* 섹션 */
-        .section {
-            margin-bottom: 32px;
-        }
+        .section { margin-bottom: 32px; }
 
         .section-title {
             display: flex;
@@ -138,10 +119,7 @@
             font-weight: 700;
             letter-spacing: 0.5px;
         }
-
-        .section-title .emoji {
-            font-size: 20px;
-        }
+        .section-title .emoji { font-size: 20px; }
 
         /* 카드 스타일 */
         .card {
@@ -156,17 +134,9 @@
             display: block;
             border: 1px solid rgba(255, 255, 255, 0.5);
         }
+        .card:active { transform: scale(0.98); box-shadow: var(--shadow); }
 
-        .card:active {
-            transform: scale(0.98);
-            box-shadow: var(--shadow);
-        }
-
-        .card-content {
-            display: flex;
-            align-items: center;
-            gap: 16px;
-        }
+        .card-content { display: flex; align-items: center; gap: 16px; }
 
         .card-icon {
             width: 56px;
@@ -179,56 +149,26 @@
             flex-shrink: 0;
             box-shadow: var(--shadow-sm);
         }
+        .card-icon img { width: 32px; height: 32px; object-fit: contain; }
 
-        .card-icon img {
-            width: 32px;
-            height: 32px;
-            object-fit: contain;
-        }
+        .card-text { flex: 1; }
 
-        .card-text {
-            flex: 1;
-        }
-
-        .card-title {
-            font-size: 17px;
-            font-weight: 700;
-            color: var(--text-dark);
-            margin-bottom: 4px;
-        }
-
-        .card-desc {
-            font-size: 13px;
-            color: var(--text-gray);
-            font-weight: 500;
-        }
-
-        .card-arrow {
-            font-size: 20px;
-            color: var(--text-gray);
-            opacity: 0.5;
-        }
+        .card-title { font-size: 17px; font-weight: 700; color: var(--text-dark); margin-bottom: 4px; }
+        .card-desc { font-size: 13px; color: var(--text-gray); font-weight: 500; }
+        .card-arrow { font-size: 20px; color: var(--text-gray); opacity: 0.5; }
 
         /* 특수 카드 스타일 */
         .card-primary {
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             color: white;
         }
-
         .card-primary .card-title,
-        .card-primary .card-desc {
-            color: white;
-        }
-
+        .card-primary .card-desc { color: white; }
         .card-primary .card-icon {
             background: rgba(255, 255, 255, 0.2);
             backdrop-filter: blur(10px);
         }
-
-        .card-primary .card-arrow {
-            color: white;
-            opacity: 0.8;
-        }
+        .card-primary .card-arrow { color: white; opacity: 0.8; }
 
         /* 가이드 카드 */
         .guide-card {
@@ -247,26 +187,15 @@
             padding-bottom: 16px;
             border-bottom: 2px solid var(--border);
         }
-
-        .guide-header .emoji {
-            font-size: 28px;
-        }
-
-        .guide-header h3 {
-            font-size: 18px;
-            font-weight: 800;
-            color: var(--text-dark);
-        }
+        .guide-header .emoji { font-size: 28px; }
+        .guide-header h3 { font-size: 18px; font-weight: 800; color: var(--text-dark); }
 
         .guide-step {
             margin-bottom: 16px;
             padding-left: 12px;
             border-left: 3px solid var(--primary);
         }
-
-        .guide-step:last-child {
-            margin-bottom: 0;
-        }
+        .guide-step:last-child { margin-bottom: 0; }
 
         .step-number {
             display: inline-block;
@@ -283,18 +212,8 @@
             margin-left: -18px;
         }
 
-        .step-title {
-            font-size: 15px;
-            font-weight: 700;
-            color: var(--text-dark);
-            margin-bottom: 6px;
-        }
-
-        .step-desc {
-            font-size: 13px;
-            color: var(--text-gray);
-            line-height: 1.6;
-        }
+        .step-title { font-size: 15px; font-weight: 700; color: var(--text-dark); margin-bottom: 6px; }
+        .step-desc { font-size: 13px; color: var(--text-gray); line-height: 1.6; }
 
         .highlight {
             color: var(--primary);
@@ -328,46 +247,21 @@
             align-items: center;
             gap: 8px;
         }
-
-        .btn:active {
-            transform: scale(0.96);
-            box-shadow: var(--shadow-sm);
-        }
-
-        .btn-icon {
-            font-size: 24px;
-        }
+        .btn:active { transform: scale(0.96); box-shadow: var(--shadow-sm); }
+        .btn-icon { font-size: 24px; }
 
         /* 앱 카드 - 작은 스타일 */
-        .app-card {
-            padding: 14px 16px;
-        }
-
-        .app-card .card-icon {
-            width: 48px;
-            height: 48px;
-            border-radius: 12px;
-        }
-
-        .app-card .card-icon img {
-            width: 28px;
-            height: 28px;
-        }
-
-        .app-card .card-title {
-            font-size: 15px;
-        }
-
-        .app-card .card-desc {
-            font-size: 12px;
-        }
+        .app-card { padding: 14px 16px; }
+        .app-card .card-icon { width: 48px; height: 48px; border-radius: 12px; }
+        .app-card .card-icon img { width: 28px; height: 28px; }
+        .app-card .card-title { font-size: 15px; }
+        .app-card .card-desc { font-size: 12px; }
 
         /* 카카오톡 가이드 */
         #kakaotalk-guide {
             display: none;
             position: fixed;
-            top: 0;
-            left: 0;
+            top: 0; left: 0;
             width: 100%;
             height: 100%;
             background: rgba(0, 0, 0, 0.8);
@@ -388,10 +282,7 @@
             text-align: center;
         }
 
-        .kakao-icon {
-            font-size: 64px;
-            margin-bottom: 20px;
-        }
+        .kakao-icon { font-size: 64px; margin-bottom: 20px; }
 
         .kakao-content h2 {
             font-size: 22px;
@@ -413,16 +304,8 @@
             color: #fee500;
             animation: bounce 1s ease-in-out infinite;
         }
-
-        .arrow-up {
-            top: -60px;
-            right: 30px;
-        }
-
-        .arrow-down {
-            bottom: -60px;
-            right: 30px;
-        }
+        .arrow-up { top: -60px; right: 30px; }
+        .arrow-down { bottom: -60px; right: 30px; }
 
         @keyframes bounce {
             0%, 100% { transform: translateY(0); }
@@ -440,17 +323,9 @@
 
         /* 반응형 */
         @media (max-width: 360px) {
-            .container {
-                padding: 0 16px;
-            }
-            
-            header h1 {
-                font-size: 28px;
-            }
-            
-            .card-title {
-                font-size: 16px;
-            }
+            .container { padding: 0 16px; }
+            header h1 { font-size: 28px; }
+            .card-title { font-size: 16px; }
         }
     </style>
 </head>
@@ -482,7 +357,7 @@
     </header>
 
     <!-- 안드로이드 바로가기 -->
-    <div class="section">
+    <div class="section" id="step1-android">
         <div class="section-title">
             <span class="badge">STEP 1</span>
             <span class="emoji">📱</span>
@@ -564,7 +439,7 @@
 
     <!-- 즉시 웹 접속 -->
     <div class="section">
-        <div class="section-title">
+        <div class="section-title" id="step3-title">
             <span class="badge">STEP 3</span>
             <span class="emoji">🌐</span>
             <span>바로 쇼핑하기</span>
@@ -637,46 +512,172 @@
 </div>
 
 <script>
-    function isKakaotalk() {
-        return /KAKAOTALK/i.test(navigator.userAgent);
+  // ─────────────────────────────────────────
+  // UA / Params
+  // ─────────────────────────────────────────
+  function isKakaotalk() { return /KAKAOTALK/i.test(navigator.userAgent); }
+  function isIos() { return /iPhone|iPad|iPod/i.test(navigator.userAgent); }
+
+  function getParam(name) {
+    try { return new URL(location.href).searchParams.get(name); }
+    catch (e) { return null; }
+  }
+
+  function addOrUpdateParam(url, key, value) {
+    try {
+      const u = new URL(url);
+      u.searchParams.set(key, value);
+      return u.toString();
+    } catch (e) {
+      const glue = url.includes("?") ? "&" : "?";
+      return url + glue + encodeURIComponent(key) + "=" + encodeURIComponent(value);
+    }
+  }
+
+  // ─────────────────────────────────────────
+  // Open external (Android: Naver App first)
+  // ─────────────────────────────────────────
+  function openExternalBrowser(url) {
+    const taggedUrl = addOrUpdateParam(url, "openExternal", "1");
+    const encoded = encodeURIComponent(taggedUrl);
+
+    // iOS: 카톡 인앱에서 'Safari로 열기' best-effort
+    if (isIos()) {
+      location.href = `kakaotalk://web/openExternal?url=${encoded}`;
+      return;
     }
 
-    function isIos() {
-        return /iPhone|iPad|iPod/i.test(navigator.userAgent);
+    // Android: 네이버앱 우선, 실패 시 크롬 fallback
+    const noProto = taggedUrl.replace(/^https?:\/\//, "");
+
+    const naverIntent =
+      `intent://${noProto}` +
+      `#Intent;scheme=https;action=android.intent.action.VIEW;` +
+      `category=android.intent.category.BROWSABLE;` +
+      `package=com.nhn.android.search;end;`;
+
+    const chromeIntent =
+      `intent://${noProto}` +
+      `#Intent;scheme=https;package=com.android.chrome;end;`;
+
+    location.href = naverIntent;
+
+    // fallback (완벽 판별은 어려워서 실전형 타임아웃 방식)
+    setTimeout(() => { location.href = chromeIntent; }, 700);
+  }
+
+  // ─────────────────────────────────────────
+  // UI patch
+  // ─────────────────────────────────────────
+  function hideStep1ForKakao() {
+    const step1 = document.getElementById("step1-android");
+    if (step1) step1.style.display = "none";
+
+    // Step3 제목 문구 살짝 변경(카톡에서만)
+    const step3Title = document.getElementById("step3-title");
+    if (step3Title) {
+      const spans = step3Title.querySelectorAll("span");
+      // 마지막 텍스트 span
+      if (spans && spans.length) spans[spans.length - 1].textContent = "바로 쇼핑하기 (네이버앱 권장)";
+    }
+  }
+
+  function closeKakaoOverlayIfAny() {
+    const guide = document.getElementById("kakaotalk-guide");
+    if (guide) guide.style.display = "none";
+  }
+
+  function showKakaoOverlay() {
+    const guide = document.getElementById("kakaotalk-guide");
+    const msg = document.getElementById("kakao-msg");
+    if (!guide || !msg) return;
+
+    // 화살표 OS별 표시
+    const up = document.getElementById("kakao-arrow-up");
+    const down = document.getElementById("kakao-arrow-down");
+    if (up) up.style.display = isIos() ? "none" : "block";
+    if (down) down.style.display = isIos() ? "block" : "none";
+
+    const btnText = isIos() ? "Safari로 열기" : "네이버앱으로 열기";
+    const subHint = isIos()
+      ? "안 열리면 오른쪽 하단 [⋯] → 'Safari로 열기'"
+      : "안 열리면 오른쪽 하단 [⋮] → '다른 브라우저로 열기'";
+
+    msg.innerHTML = `
+      <h2 style="margin-bottom:10px;">${isIos() ? "🍎 iPhone 카카오톡 안내" : "📱 Android 카카오톡 안내"}</h2>
+      <p style="margin-bottom:14px;">
+        카카오톡 내부에서는 <b>바로가기 설치</b>가 제한될 수 있어요.<br><br>
+        아래 버튼으로 <b>외부 브라우저</b>에서 열면 정상적으로 설치됩니다.
+        <br><span style="font-size:12px; opacity:0.85;">(${subHint})</span>
+      </p>
+
+      <button id="open-ext-btn" style="
+        width:100%;
+        border:none;
+        border-radius:18px;
+        padding:14px 16px;
+        font-weight:900;
+        font-size:15px;
+        cursor:pointer;
+        color:white;
+        letter-spacing:-0.2px;
+        background: linear-gradient(135deg, #6366f1 0%, #4f46e5 45%, #ec4899 100%);
+        box-shadow: 0 14px 30px rgba(0,0,0,0.22);
+        transform: translateY(0);
+        transition: transform 0.15s ease, box-shadow 0.15s ease, filter 0.15s ease;
+      ">
+        ${btnText} 🚀
+      </button>
+
+      <div style="margin-top:12px; font-size:12px; color:#3c1e1e; opacity:0.9; font-weight:700;">
+        ✅ 외부에서 열면 STEP 1(바로가기 추가) 버튼이 활성화됩니다.
+      </div>
+    `;
+
+    const btn = document.getElementById("open-ext-btn");
+    if (btn) {
+      btn.addEventListener("touchstart", () => {
+        btn.style.transform = "translateY(1px)";
+        btn.style.boxShadow = "0 10px 22px rgba(0,0,0,0.18)";
+        btn.style.filter = "brightness(0.98)";
+      }, { passive: true });
+
+      btn.addEventListener("touchend", () => {
+        btn.style.transform = "translateY(0)";
+        btn.style.boxShadow = "0 14px 30px rgba(0,0,0,0.22)";
+        btn.style.filter = "brightness(1)";
+      }, { passive: true });
+
+      btn.onclick = () => openExternalBrowser(location.href);
     }
 
-    window.onload = function() {
-        if (isKakaotalk()) {
-            const guide = document.getElementById('kakaotalk-guide');
-            const msg = document.getElementById('kakao-msg');
-            
-            guide.style.display = 'flex';
-            
-            if (isIos()) {
-                document.getElementById('kakao-arrow-down').style.display = 'block';
-                msg.innerHTML = `
-                    <h2>🍎 iPhone 카카오톡 안내</h2>
-                    <p>
-                        카카오톡에서는 바로가기를<br>
-                        설치할 수 없습니다.<br><br>
-                        오른쪽 하단 <b>[⋯]</b> 또는 <b>[↑]</b>를 눌러<br>
-                        <b>'Safari로 열기'</b>를 선택하세요!
-                    </p>
-                `;
-            } else {
-                document.getElementById('kakao-arrow-up').style.display = 'block';
-                msg.innerHTML = `
-                    <h2>📱 Android 카카오톡 안내</h2>
-                    <p>
-                        카카오톡에서는 바로가기를<br>
-                        설치할 수 없습니다.<br><br>
-                        오른쪽 하단 <b>[⋮]</b>을 눌러<br>
-                        <b>'다른 브라우저로 열기'</b>를 선택하세요!
-                    </p>
-                `;
-            }
-        }
-    };
+    guide.style.display = "flex";
+
+    // 배경 클릭 시 닫기(원치 않으면 삭제)
+    guide.addEventListener("click", (e) => {
+      if (e.target && e.target.closest && e.target.closest(".kakao-content")) return;
+      guide.style.display = "none";
+    }, { once: true });
+  }
+
+  // ─────────────────────────────────────────
+  // Boot
+  // ─────────────────────────────────────────
+  window.addEventListener("load", function() {
+    const openedExternal = getParam("openExternal") === "1";
+
+    // 외부 브라우저로 다시 열린 경우: 오버레이 자동 닫기(또는 표시 안 함)
+    if (openedExternal) {
+      closeKakaoOverlayIfAny();
+      return;
+    }
+
+    // 카톡 인앱일 때만: Step1 숨김 + 오버레이 띄우기
+    if (isKakaotalk()) {
+      hideStep1ForKakao();
+      showKakaoOverlay();
+    }
+  });
 </script>
 
 </body>

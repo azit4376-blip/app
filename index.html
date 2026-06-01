@@ -3,110 +3,196 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-  <meta name="google-site-verification" content="u36-FtkXCnHJ3qi2akqjFoLQ2M7pudNXb6r19_hKcMg">
+  <meta name="google-site-verification" content="u36-FtkXCnHJ3qi2akqjFoLQ2M7pudNXb6r19_hKcMg" />
 
-  <title>쇼핑 바로가기 아이콘 만들기</title>
-  <meta name="description" content="쿠팡과 알리익스프레스 바로가기 아이콘을 휴대폰 홈 화면에 추가하세요.">
-  <meta name="keywords" content="쿠팡 바로가기, 알리익스프레스 바로가기, 홈화면 추가, 바탕화면 아이콘">
+  <title>Easy Shortcut - 스마트 쇼핑 바로가기</title>
+  <meta name="description" content="쿠팡, 알리익스프레스 등 주요 쇼핑몰 바로가기 아이콘을 홈 화면에 추가하고 간편하게 쇼핑하세요.">
+  <meta name="keywords" content="쇼핑 바로가기, 쿠팡 바로가기, 알리익스프레스, 홈화면 추가, 스마트 쇼핑">
   <link rel="canonical" href="https://azit4376-blip.github.io/app/">
 
   <meta property="og:type" content="website">
-  <meta property="og:title" content="쇼핑 바로가기 아이콘 만들기">
-  <meta property="og:description" content="쿠팡과 알리익스프레스 아이콘을 폰 홈 화면에 추가하세요.">
-  <meta property="og:image" content="https://azit4376-blip.github.io/app/coupang-icon.png">
+  <meta property="og:title" content="Easy Shortcut - 스마트 쇼핑 바로가기">
+  <meta property="og:description" content="쇼핑몰 아이콘을 폰 바탕화면에 추가하세요!">
+  <meta property="og:image" content="https://www.google.com/s2/favicons?domain=coupang.com&sz=128">
   <meta property="og:url" content="https://azit4376-blip.github.io/app/">
 
   <link rel="stylesheet" href="style.css">
   <script src="app.js" defer></script>
 </head>
+
 <body>
+  <!-- 카카오톡 가이드 오버레이 -->
   <div id="kakaotalk-guide" aria-hidden="true">
-    <div class="kakao-content" role="dialog" aria-modal="true" aria-labelledby="kakao-title">
-      <div class="kakao-icon">💬</div>
-      <h2 id="kakao-title"></h2>
-      <p id="kakao-desc"></p>
-      <button id="open-ext-btn" class="primary-btn" type="button"></button>
-      <div class="kakao-subnote" id="kakao-subnote"></div>
+    <div id="arrow-container">
+      <div id="kakao-arrow-up" class="arrow arrow-up">↑</div>
+
+      <div class="kakao-content" role="dialog" aria-modal="true" aria-labelledby="kakao-title">
+        <div class="kakao-icon">💬</div>
+
+        <div id="kakao-msg">
+          <h2 id="kakao-title"></h2>
+          <p id="kakao-desc"></p>
+
+          <button id="open-ext-btn" class="kakao-open-btn" type="button"></button>
+
+          <div class="kakao-subnote" id="kakao-subnote"></div>
+        </div>
+      </div>
+
+      <div id="kakao-arrow-down" class="arrow arrow-down">↓</div>
     </div>
   </div>
 
-  <main class="page">
-    <section class="notice notice-top">
-      <b>📢 안내</b>
-      본 페이지는 <b>쿠팡 파트너스, 네이버 브랜드커넥트, 알리익스프레스 어필리에이트</b> 활동의 일환으로 수수료가 지급될 수 있습니다.
-    </section>
+  <div class="container">
+    <!-- FTC 공지 -->
+    <div class="ftc-notice">
+      <b>📢 안내</b> 본 페이지는 <b>쿠팡 파트너스, 네이버 브랜드커넥트, 알리익스프레스 어필리에이트</b> 활동의 일환으로 수수료가 지급될 수 있습니다.
+    </div>
 
-    <section class="hero">
-      <div class="hero-badge">HOME SCREEN SHORTCUT</div>
-      <h1>쇼핑 바로가기<br>아이콘 만들기</h1>
-      <p>쿠팡, 알리익스프레스 아이콘을 휴대폰 홈 화면에 각각 추가하세요.</p>
-      <div class="device-pill" id="device-pill">기기 확인 중...</div>
-    </section>
+    <!-- 헤더 -->
+    <header>
+      <div class="logo">🛍️</div>
+      <h1>Easy Shortcut</h1>
+      <p>한 번의 클릭으로 쇼핑 시작</p>
+    </header>
 
-    <section class="shortcut-grid">
-      <article class="shop-card coupang-card">
-        <div class="shop-head">
-          <img src="coupang-icon.png" alt="쿠팡" class="shop-logo">
-          <div>
-            <h2>쿠팡 아이콘 만들기</h2>
-            <p>홈 화면 아이콘을 누르면 쿠팡 링크로 연결</p>
-          </div>
-        </div>
-
-        <div class="action-row android-only">
-          <a class="primary-btn" href="intent://addshortcut?url=https://link.coupang.com/a/cpO0Kv&icon=https://www.google.com/s2/favicons?domain=coupang.com&sz=64&title=쿠팡&serviceCode=whois&version=11#Intent;scheme=naversearchapp;action=android.intent.action.VIEW;category=android.intent.category.BROWSABLE;package=com.nhn.android.search;end">Android 홈 화면에 쿠팡 추가</a>
-        </div>
-
-        <div class="action-row ios-only">
-          <a class="primary-btn" href="coupang.html">iPhone 쿠팡 아이콘 만들기</a>
-        </div>
-
-        <div class="action-row desktop-only">
-          <a class="primary-btn" href="coupang.html">PC/기타에서 쿠팡 바로가기 열기</a>
-        </div>
-      </article>
-
-      <article class="shop-card ali-card">
-        <div class="shop-head">
-          <img src="ali-icon.png" alt="알리익스프레스" class="shop-logo">
-          <div>
-            <h2>알리 아이콘 만들기</h2>
-            <p>홈 화면 아이콘을 누르면 알리 링크로 연결</p>
-          </div>
-        </div>
-
-        <div class="action-row android-only">
-          <a class="primary-btn" href="intent://addshortcut?url=https://s.click.aliexpress.com/e/_DkmHcWJ&icon=https://www.google.com/s2/favicons?domain=aliexpress.com&sz=64&title=알리&serviceCode=whois&version=11#Intent;scheme=naversearchapp;action=android.intent.action.VIEW;category=android.intent.category.BROWSABLE;package=com.nhn.android.search;end">Android 홈 화면에 알리 추가</a>
-        </div>
-
-        <div class="action-row ios-only">
-          <a class="primary-btn" href="ali.html">iPhone 알리 아이콘 만들기</a>
-        </div>
-
-        <div class="action-row desktop-only">
-          <a class="primary-btn" href="ali.html">PC/기타에서 알리 바로가기 열기</a>
-        </div>
-      </article>
-    </section>
-
-    <section class="guide-card">
-      <h2>사용 방법</h2>
-      <div class="guide-list">
-        <div><b>Android</b><span>쿠팡/알리 버튼을 누르면 네이버앱 바로가기 기능으로 홈 화면 아이콘을 만듭니다.</span></div>
-        <div><b>iPhone</b><span>쿠팡/알리 전용 페이지에서 Safari 공유 버튼 → 홈 화면에 추가를 선택합니다.</span></div>
-        <div><b>PC</b><span>바로가기 페이지를 열고 브라우저 북마크나 바탕화면 바로가기로 사용할 수 있습니다.</span></div>
+    <!-- 안드로이드 바로가기 (카톡에서는 숨김 처리됨) -->
+    <div class="section" id="step1-android">
+      <div class="section-title">
+        <span class="badge">STEP 1</span>
+        <span class="emoji">📱</span>
+        <span>Android 바로가기</span>
       </div>
-    </section>
 
-    <section class="direct-links">
-      <h2>바로 쇼핑하기</h2>
-      <div class="link-grid">
-        <a href="https://link.coupang.com/a/cpO0Kv" target="_blank" rel="noopener">쿠팡 바로가기</a>
-        <a href="https://s.click.aliexpress.com/e/_DkmHcWJ" target="_blank" rel="noopener">알리 바로가기</a>
+      <a href="intent://addshortcut?url=https://link.coupang.com/a/cpO0Kv&icon=https://www.google.com/s2/favicons?domain=coupang.com&sz=64&title=쿠팡&serviceCode=whois&version=11#Intent;scheme=naversearchapp;action=android.intent.action.VIEW;category=android.intent.category.BROWSABLE;package=com.nhn.android.search;end"
+         class="card card-primary">
+        <div class="card-content">
+          <div class="card-icon">
+            <img src="https://www.google.com/s2/favicons?domain=coupang.com&sz=64" alt="쿠팡">
+          </div>
+          <div class="card-text">
+            <div class="card-title">쿠팡 바로가기 추가</div>
+            <div class="card-desc">홈 화면에 쿠팡 아이콘 설치</div>
+          </div>
+          <div class="card-arrow">→</div>
+        </div>
+      </a>
+
+      <a href="intent://addshortcut?url=https://s.click.aliexpress.com/e/_DkmHcWJ&icon=https://www.google.com/s2/favicons?domain=aliexpress.com&sz=64&title=알리&serviceCode=whois&version=11#Intent;scheme=naversearchapp;action=android.intent.action.VIEW;category=android.intent.category.BROWSABLE;package=com.nhn.android.search;end"
+         class="card">
+        <div class="card-content">
+          <div class="card-icon">
+            <img src="https://www.google.com/s2/favicons?domain=aliexpress.com&sz=64" alt="알리">
+          </div>
+          <div class="card-text">
+            <div class="card-title">알리익스프레스 바로가기 추가</div>
+            <div class="card-desc">홈 화면에 알리 아이콘 설치</div>
+          </div>
+          <div class="card-arrow">→</div>
+        </div>
+      </a>
+    </div>
+
+    <!-- iPhone 가이드 -->
+    <div class="section">
+      <div class="section-title">
+        <span class="badge">STEP 2</span>
+        <span class="emoji">🍎</span>
+        <span>iPhone 설치 가이드</span>
       </div>
-    </section>
 
-    <footer>© 2026 SHOPPING GATE MANAGER</footer>
-  </main>
+      <div class="guide-card">
+        <div class="guide-header">
+          <span class="emoji">📌</span>
+          <h3>홈 화면에 추가하는 방법</h3>
+        </div>
+
+        <div class="guide-step">
+          <div class="step-title"><span class="step-number">1</span>쇼핑몰 사이트 접속</div>
+          <div class="step-desc">아래 <span class="highlight">Step 3</span>에서 원하는 쇼핑몰 버튼을 클릭하세요</div>
+        </div>
+
+        <div class="guide-step">
+          <div class="step-title"><span class="step-number">2</span>공유 메뉴 열기</div>
+          <div class="step-desc">Safari 하단의 <span class="highlight">공유 (↑)</span> 아이콘을 탭하세요</div>
+        </div>
+
+        <div class="guide-step">
+          <div class="step-title"><span class="step-number">3</span>홈 화면에 추가</div>
+          <div class="step-desc">스크롤해서 <span class="highlight">홈 화면에 추가</span>를 선택하고 완료를 누르세요</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 즉시 웹 접속 -->
+    <div class="section">
+      <div class="section-title" id="step3-title">
+        <span class="badge">STEP 3</span>
+        <span class="emoji">🌐</span>
+        <span id="step3-title-text">바로 쇼핑하기</span>
+      </div>
+
+      <div class="button-grid">
+        <a href="https://link.coupang.com/a/cpO0Kv" class="btn" target="_blank" rel="noopener">
+          <span class="btn-icon">🛒</span>
+          쿠팡 웹
+        </a>
+        <a href="https://s.click.aliexpress.com/e/_DkmHcWJ" class="btn" target="_blank" rel="noopener">
+          <span class="btn-icon">🌏</span>
+          알리 웹
+        </a>
+      </div>
+    </div>
+
+    <!-- 공식 앱 -->
+    <div class="section">
+      <div class="section-title">
+        <span class="badge">STEP 4</span>
+        <span class="emoji">📲</span>
+        <span>공식 앱 다운로드</span>
+      </div>
+
+      <a href="https://play.google.com/store/apps/details?id=com.nhn.android.search&hl=ko" class="card app-card">
+        <div class="card-content">
+          <div class="card-icon">
+            <img src="https://www.google.com/s2/favicons?domain=naver.com&sz=64" alt="네이버">
+          </div>
+          <div class="card-text">
+            <div class="card-title">네이버 앱</div>
+            <div class="card-desc">바로가기 기능 필수</div>
+          </div>
+          <div class="card-arrow">→</div>
+        </div>
+      </a>
+
+      <a href="https://play.google.com/store/apps/details?id=com.coupang.mobile&hl=ko" class="card app-card">
+        <div class="card-content">
+          <div class="card-icon">
+            <img src="https://www.google.com/s2/favicons?domain=coupang.com&sz=64" alt="쿠팡">
+          </div>
+          <div class="card-text">
+            <div class="card-title">쿠팡 앱</div>
+            <div class="card-desc">더 빠른 쇼핑</div>
+          </div>
+          <div class="card-arrow">→</div>
+        </div>
+      </a>
+
+      <a href="https://play.google.com/store/apps/details?id=com.alibaba.aliexpresshd&hl=ko" class="card app-card">
+        <div class="card-content">
+          <div class="card-icon">
+            <img src="https://www.google.com/s2/favicons?domain=aliexpress.com&sz=64" alt="알리">
+          </div>
+          <div class="card-text">
+            <div class="card-title">알리익스프레스 앱</div>
+            <div class="card-desc">글로벌 쇼핑</div>
+          </div>
+          <div class="card-arrow">→</div>
+        </div>
+      </a>
+    </div>
+
+    <div class="footer">© 2026 SHOPPING GATE MANAGER</div>
+  </div>
 </body>
 </html>

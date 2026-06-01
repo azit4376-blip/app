@@ -1,21 +1,26 @@
+// ─────────────────────────────────────────
+// UA / Params
+// ─────────────────────────────────────────
 function isKakaotalk() {
   return /KAKAOTALK/i.test(navigator.userAgent);
 }
 function isIos() {
-  return /iPhone|iPad|iPod/i.test(navigator.userAgent) || (navigator.platform === "MacIntel" && navigator.maxTouchPoints > 1);
+  return /iPhone|iPad|iPod/i.test(navigator.userAgent);
 }
 function isAndroid() {
   return /Android/i.test(navigator.userAgent);
 }
-function isDesktop() {
-  return !isIos() && !isAndroid();
-}
+
 function getParam(name) {
-  try { return new URL(location.href).searchParams.get(name); } catch { return null; }
+  try {
+    return new URL(location.href).searchParams.get(name);
+  } catch {
+    return null;
+  }
 }
 function addOrUpdateParam(url, key, value) {
   try {
-    const u = new URL(url, location.href);
+    const u = new URL(url);
     u.searchParams.set(key, value);
     return u.toString();
   } catch {
@@ -23,106 +28,132 @@ function addOrUpdateParam(url, key, value) {
     return url + glue + encodeURIComponent(key) + "=" + encodeURIComponent(value);
   }
 }
+
+// ─────────────────────────────────────────
+// External open
+//  - iOS: Safari 열기 "시도" (카톡 openExternal)
+//  - Android: Naver app으로 "고정" (com.nhn.android.search)
+// ─────────────────────────────────────────
 function openExternalBrowser(url) {
   const taggedUrl = addOrUpdateParam(url, "openExternal", "1");
   const encoded = encodeURIComponent(taggedUrl);
 
+  // iOS: Safari 열기 시도 (환경에 따라 막힐 수 있음: 확실하지 않음)
   if (isIos()) {
-    location.href = `kakaotalk://web/openExternal?url=${encoded}`;
+    const schemeUrl = `kakaotalk://web/openExternal?url=${encoded}`;
+    location.href = schemeUrl;
+
+    setTimeout(() => {
+      try { window.open(schemeUrl, "_self"); } catch {}
+    }, 50);
+
     return;
   }
 
+  // Android: 네이버앱으로 "고정"
   if (isAndroid()) {
     const noProto = taggedUrl.replace(/^https?:\/\//, "");
-    const fallback = encodeURIComponent(taggedUrl);
-    const intentUrl =
+
+    // 네이버앱 없을 때만 fallback으로 스토어로 이동시키기 (타임아웃 금지)
+    const playStoreNaver =
+      "https://play.google.com/store/apps/details?id=com.nhn.android.search&hl=ko";
+    const fallback = encodeURIComponent(playStoreNaver);
+
+    const naverIntent =
       `intent://${noProto}` +
       `#Intent;scheme=https;action=android.intent.action.VIEW;` +
       `category=android.intent.category.BROWSABLE;` +
+      `package=com.nhn.android.search;` +
       `S.browser_fallback_url=${fallback};` +
       `end;`;
-    location.href = intentUrl;
+
+    location.href = naverIntent;
     return;
   }
 
+  // 기타(데스크탑 등)
   window.open(taggedUrl, "_blank", "noopener");
 }
-function setDeviceView() {
-  const pill = document.getElementById("device-pill");
-  if (pill) {
-    if (isAndroid()) pill.textContent = "현재 기기: Android";
-    else if (isIos()) pill.textContent = "현재 기기: iPhone / iPad";
-    else pill.textContent = "현재 기기: PC / 기타";
+
+// ─────────────────────────────────────────
+// UI patch
+// ─────────────────────────────────────────
+function hideStep1ForKakao() {
+  const step1 = document.getElementById("step1-android");
+  if (step1) step1.style.display = "none";
+
+  const step3Text = document.getElementById("step3-title-text");
+  if (step3Text) {
+    step3Text.textContent = isIos()
+      ? "바로 쇼핑하기 (Safari 권장)"
+      : "바로 쇼핑하기 (네이버앱 권장)";
   }
-  document.documentElement.classList.toggle("is-android", isAndroid());
-  document.documentElement.classList.toggle("is-ios", isIos());
-  document.documentElement.classList.toggle("is-desktop", isDesktop());
 }
+
 function closeOverlay() {
   const guide = document.getElementById("kakaotalk-guide");
   if (!guide) return;
   guide.style.display = "none";
   guide.setAttribute("aria-hidden", "true");
 }
-function showKakaoOverlay() {
+
+function showOverlay() {
   const guide = document.getElementById("kakaotalk-guide");
   const title = document.getElementById("kakao-title");
   const desc = document.getElementById("kakao-desc");
   const btn = document.getElementById("open-ext-btn");
   const subnote = document.getElementById("kakao-subnote");
+  const up = document.getElementById("kakao-arrow-up");
+  const down = document.getElementById("kakao-arrow-down");
+
   if (!guide || !title || !desc || !btn || !subnote) return;
 
+  if (up) up.style.display = isIos() ? "none" : "block";
+  if (down) down.style.display = isIos() ? "block" : "none";
+
   if (isIos()) {
-    title.textContent = "iPhone은 Safari에서 추가하세요";
-    desc.innerHTML = "카카오톡 안에서는 홈 화면 추가가 잘 안 보일 수 있어요.<br>Safari로 연 뒤 쿠팡/알리 아이콘 만들기를 진행하세요.";
-    btn.textContent = "Safari로 열기";
-    subnote.textContent = "안 열리면 카카오톡 오른쪽 하단 [⋯] → Safari로 열기를 선택하세요.";
-  } else if (isAndroid()) {
-    title.textContent = "Android는 외부 브라우저 권장";
-    desc.innerHTML = "카카오톡 안에서는 바로가기 추가가 제한될 수 있어요.<br>외부 브라우저에서 열고 쿠팡/알리 버튼을 눌러주세요.";
-    btn.textContent = "외부 브라우저로 열기";
-    subnote.textContent = "네이버앱 바로가기 기능을 사용하면 홈 화면에 아이콘을 만들 수 있습니다.";
+    title.textContent = "🍎 iPhone 카카오톡 안내";
+    desc.innerHTML =
+      "카카오톡 내부에서는 <b>바로가기 설치</b>가 제한될 수 있어요.<br><br>" +
+      "아래 버튼으로 <b>Safari</b>에서 열면 설치가 쉬워집니다.";
+    btn.textContent = "Safari로 열기 🚀";
+    subnote.textContent = "✅ 안 열리면 오른쪽 하단 [⋯] → 'Safari로 열기'를 선택하세요.";
   } else {
-    title.textContent = "외부 브라우저로 열기";
-    desc.textContent = "브라우저에서 열어 바로가기를 만들어주세요.";
-    btn.textContent = "열기";
-    subnote.textContent = "";
+    title.textContent = "📱 Android 카카오톡 안내";
+    desc.innerHTML =
+      "카카오톡 내부에서는 <b>바로가기 설치</b>가 제한될 수 있어요.<br><br>" +
+      "아래 버튼을 누르면 <b>네이버앱</b>으로 열려 설치가 가능합니다.";
+    btn.textContent = "네이버앱으로 열기 🚀";
+    subnote.textContent = "✅ 네이버앱이 없다면 설치 화면으로 안내됩니다.";
   }
 
   btn.onclick = () => openExternalBrowser(location.href);
+
   guide.style.display = "flex";
   guide.setAttribute("aria-hidden", "false");
+
   guide.addEventListener("click", (e) => {
-    if (e.target.closest(".kakao-content")) return;
+    const content = e.target.closest(".kakao-content");
+    if (content) return;
     closeOverlay();
   }, { once: true });
 }
-function bindTargetPage() {
-  const body = document.body;
-  const targetUrl = body.dataset.targetUrl;
-  const targetName = body.dataset.targetName || "쇼핑몰";
-  if (!targetUrl) return;
 
-  const openBtn = document.querySelector("[data-open-target]");
-  if (openBtn) openBtn.addEventListener("click", () => location.href = targetUrl);
-
-  const fromHome = window.navigator.standalone === true || getParam("from") === "home";
-  const shouldAutoOpen = fromHome && !isKakaotalk();
-  if (shouldAutoOpen) {
-    const msg = document.createElement("div");
-    msg.className = "auto-open-msg";
-    msg.textContent = `${targetName}으로 이동 중입니다...`;
-    document.body.appendChild(msg);
-    setTimeout(() => { location.href = targetUrl; }, 450);
-  }
-}
+// ─────────────────────────────────────────
+// Boot
+// ─────────────────────────────────────────
 window.addEventListener("load", () => {
-  setDeviceView();
-  bindTargetPage();
+  const openedExternal = getParam("openExternal") === "1";
 
-  if (getParam("openExternal") === "1") {
+  // 외부로 열린 흔적이면 오버레이 표시 안 함
+  if (openedExternal) {
     closeOverlay();
     return;
   }
-  if (isKakaotalk()) showKakaoOverlay();
+
+  // 카톡 인앱일 때만
+  if (isKakaotalk()) {
+    hideStep1ForKakao();
+    showOverlay();
+  }
 });

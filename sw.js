@@ -1,4 +1,4 @@
-const CACHE_NAME = "shopping-home-stable20260606b";
+const CACHE_NAME = "shopping-home-stable20260606c";
 const ASSETS = [
   "./",
   "./index.html",

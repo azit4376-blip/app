@@ -1,4 +1,4 @@
-/* Easy Shortcut - stable20260606b
+/* Easy Shortcut - stable20260606c
  * 정리 버전
  * - index.html: 쇼핑홈 메인
  * - coupang.html: 쿠팡 아이콘 설치 + 홈화면 실행 시 쿠팡 자동 이동
@@ -143,7 +143,7 @@
     return (
       "naversearchapp://addshortcut?" +
       "url=" + encodeURIComponent(shop.targetUrl) +
-      "&icon=" + encodeURIComponent(absoluteUrl(shop.icon + "?v=stable20260606b")) +
+      "&icon=" + encodeURIComponent(absoluteUrl(shop.icon + "?v=stable20260606c")) +
       "&title=" + encodeURIComponent(shop.shortName) +
       "&serviceCode=whois&version=11"
     );
@@ -301,7 +301,7 @@
 
   function registerServiceWorker() {
     if (!("serviceWorker" in navigator)) return;
-    navigator.serviceWorker.register("./sw.js?v=stable20260606b").catch(() => null);
+    navigator.serviceWorker.register("./sw.js?v=stable20260606c").catch(() => null);
   }
 
   function init() {

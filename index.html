@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, viewport-fit=cover">
+  <meta name="format-detection" content="telephone=no">
+  <meta name="google-site-verification" content="u36-FtkXCnHJ3qi2akqjFoLQ2M7pudNXb6r19_hKcMg">
+
+  <title>Easy Shortcut - 쿠팡·알리 쇼핑 바로가기</title>
+  <meta name="description" content="쿠팡, 알리익스프레스 바로가기 아이콘을 휴대폰 홈 화면에 추가하고 카카오톡·Safari·Android 환경에서 간편하게 쇼핑하세요.">
+  <meta name="keywords" content="쇼핑 바로가기, 쿠팡 바로가기, 알리익스프레스 바로가기, 홈화면 추가, 카카오톡 외부브라우저, 네이버앱 바로가기">
+  <link rel="canonical" href="https://azit4376-blip.github.io/app/">
+
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Easy Shortcut - 쿠팡·알리 쇼핑 바로가기">
+  <meta property="og:description" content="쿠팡·알리 쇼핑 아이콘을 휴대폰 홈 화면에 추가하세요.">
+  <meta property="og:image" content="https://azit4376-blip.github.io/app/icon-512.png">
+  <meta property="og:url" content="https://azit4376-blip.github.io/app/">
+
+  <meta name="theme-color" content="#101828">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="default">
+  <meta name="apple-mobile-web-app-title" content="쇼핑홈">
+  <link rel="apple-touch-icon" href="icon-192.png">
+  <link rel="icon" href="icon-192.png">
+  <link rel="manifest" href="manifest.json">
+
+  <link rel="stylesheet" href="style.css">
+  <script src="app.js" defer></script>
+</head>
+
+<body data-page="index">
+  <div id="kakaotalk-guide" class="overlay" aria-hidden="true">
+    <div class="overlay-panel" role="dialog" aria-modal="true" aria-labelledby="kakao-title">
+      <button class="overlay-close" type="button" data-close-overlay aria-label="닫기">×</button>
+      <div class="overlay-badge">💬</div>
+      <p class="overlay-eyebrow">카카오톡 인앱 브라우저 감지</p>
+      <h2 id="kakao-title">외부 브라우저에서 여는 게 안정적이에요</h2>
+      <p id="kakao-desc" class="overlay-desc"></p>
+      <button id="open-ext-btn" class="primary-btn overlay-btn" type="button">외부 브라우저로 열기</button>
+      <p id="kakao-subnote" class="overlay-note"></p>
+    </div>
+  </div>
+
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
+
+  <main class="container">
+    <section class="notice-card disclosure">
+      <b>📢 안내</b>
+      이 페이지의 일부 링크는 쿠팡 파트너스, 알리익스프레스 어필리에이트 활동의 일환으로 수수료가 지급될 수 있습니다.
+    </section>
+
+    <header class="hero">
+      <div class="logo" aria-hidden="true">🛍️</div>
+      <p class="eyebrow">Shopping Shortcut</p>
+      <h1>Easy Shortcut</h1>
+      <p class="hero-desc">카카오톡에서도, iPhone Safari에서도, Android에서도<br>쿠팡·알리 바로가기를 깔끔하게 만들 수 있게 정리했습니다.</p>
+      <div class="platform-chip" id="platform-chip">기기 환경 확인 중</div>
+    </header>
+
+    <section class="section quick-actions">
+      <div class="section-title">
+        <span class="badge">먼저 선택</span>
+        <span class="emoji">⚡</span>
+        <span>바로 쇼핑하기</span>
+      </div>
+
+      <div class="button-grid">
+        <button class="shop-tile coupang-tile" type="button" data-open-shop="coupang">
+          <img src="coupang-icon.png" alt="" class="shop-icon" loading="lazy">
+          <span>쿠팡 열기</span>
+          <small>쿠팡 링크</small>
+        </button>
+        <button class="shop-tile ali-tile" type="button" data-open-shop="ali">
+          <img src="ali-icon.png" alt="" class="shop-icon" loading="lazy">
+          <span>알리 열기</span>
+          <small>알리 링크</small>
+        </button>
+      </div>
+    </section>
+
+    <section class="section only-kakao">
+      <div class="guide-card kakao-card">
+        <div class="guide-header">
+          <span class="emoji">💬</span>
+          <h2>카카오톡에서 열었다면</h2>
+        </div>
+        <p class="guide-copy">카카오톡 안에서는 홈 화면 추가나 외부 앱 연결이 막히는 경우가 많습니다. 아래 버튼으로 Safari 또는 기본 브라우저에서 다시 열어주세요.</p>
+        <button class="primary-btn" type="button" data-open-external-current>외부 브라우저로 다시 열기</button>
+      </div>
+    </section>
+
+    <section class="section only-android" id="android-shortcuts">
+      <div class="section-title">
+        <span class="badge">Android</span>
+        <span class="emoji">📱</span>
+        <span>홈 화면 아이콘 추가</span>
+      </div>
+
+      <div class="guide-card">
+        <div class="guide-header">
+          <span class="emoji">✅</span>
+          <h2>네이버앱 바로가기 방식</h2>
+        </div>
+        <p class="guide-copy">Android는 네이버앱의 바로가기 기능을 이용하면 홈 화면에 쇼핑 아이콘을 바로 만들 수 있습니다.</p>
+        <button class="card card-primary" type="button" data-shortcut-shop="coupang">
+          <span class="card-icon"><img src="coupang-icon.png" alt="쿠팡"></span>
+          <span class="card-text"><b>쿠팡 아이콘 추가</b><small>홈 화면에 쿠팡 바로가기 만들기</small></span>
+          <span class="card-arrow">→</span>
+        </button>
+        <button class="card" type="button" data-shortcut-shop="ali">
+          <span class="card-icon"><img src="ali-icon.png" alt="알리"></span>
+          <span class="card-text"><b>알리 아이콘 추가</b><small>홈 화면에 알리 바로가기 만들기</small></span>
+          <span class="card-arrow">→</span>
+        </button>
+        <p class="mini-note">네이버앱이 없으면 설치 화면으로 이동합니다.</p>
+      </div>
+    </section>
+
+    <section class="section only-ios" id="ios-guide">
+      <div class="section-title">
+        <span class="badge">iPhone</span>
+        <span class="emoji">🍎</span>
+        <span>홈 화면 추가 방법</span>
+      </div>
+
+      <div class="guide-card">
+        <div class="guide-header">
+          <span class="emoji">📌</span>
+          <h2>Safari에서 아이콘 만들기</h2>
+        </div>
+        <ol class="steps">
+          <li><b>1</b><span>아래에서 원하는 쇼핑몰 설치 페이지를 엽니다.</span></li>
+          <li><b>2</b><span>Safari 하단의 <strong>공유 버튼 ↑</strong>을 누릅니다.</span></li>
+          <li><b>3</b><span><strong>홈 화면에 추가</strong>를 선택하고 이름을 확인한 뒤 추가합니다.</span></li>
+        </ol>
+        <div class="button-grid slim">
+          <a class="secondary-btn" href="coupang.html?install=1">쿠팡 설치 페이지</a>
+          <a class="secondary-btn" href="ali.html?install=1">알리 설치 페이지</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="section universal-guide">
+      <div class="section-title">
+        <span class="badge">공통</span>
+        <span class="emoji">🧭</span>
+        <span>설치 페이지 직접 열기</span>
+      </div>
+
+      <div class="install-grid">
+        <a class="install-card coupang-border" href="coupang.html?install=1">
+          <img src="coupang-icon.png" alt="쿠팡" class="install-icon">
+          <b>쿠팡 아이콘 만들기</b>
+          <span>iPhone 홈 화면 추가용</span>
+        </a>
+        <a class="install-card ali-border" href="ali.html?install=1">
+          <img src="ali-icon.png" alt="알리익스프레스" class="install-icon">
+          <b>알리 아이콘 만들기</b>
+          <span>iPhone 홈 화면 추가용</span>
+        </a>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="section-title">
+        <span class="badge">앱</span>
+        <span class="emoji">📲</span>
+        <span>필요 앱 설치</span>
+      </div>
+
+      <a href="https://play.google.com/store/apps/details?id=com.nhn.android.search&hl=ko" class="card app-card" target="_blank" rel="noopener noreferrer">
+        <span class="card-icon"><img src="https://www.google.com/s2/favicons?domain=naver.com&sz=64" alt="네이버"></span>
+        <span class="card-text"><b>네이버 앱</b><small>Android 바로가기 생성에 사용</small></span>
+        <span class="card-arrow">→</span>
+      </a>
+      <a href="https://play.google.com/store/apps/details?id=com.coupang.mobile&hl=ko" class="card app-card" target="_blank" rel="noopener noreferrer">
+        <span class="card-icon"><img src="https://www.google.com/s2/favicons?domain=coupang.com&sz=64" alt="쿠팡"></span>
+        <span class="card-text"><b>쿠팡 앱</b><small>모바일 쇼핑 앱</small></span>
+        <span class="card-arrow">→</span>
+      </a>
+      <a href="https://play.google.com/store/apps/details?id=com.alibaba.aliexpresshd&hl=ko" class="card app-card" target="_blank" rel="noopener noreferrer">
+        <span class="card-icon"><img src="https://www.google.com/s2/favicons?domain=aliexpress.com&sz=64" alt="알리"></span>
+        <span class="card-text"><b>AliExpress 앱</b><small>글로벌 쇼핑 앱</small></span>
+        <span class="card-arrow">→</span>
+      </a>
+    </section>
+
+    <section class="section faq-card">
+      <details>
+        <summary>아이콘을 눌렀을 때 바로 쇼핑몰로 이동하나요?</summary>
+        <p>Android 네이버앱 바로가기는 쇼핑몰 링크를 바로 열도록 구성했습니다. iPhone은 Safari 정책상 홈 화면에 추가한 설치 페이지가 먼저 열리고, 홈 화면 실행 환경에서는 자동으로 쇼핑몰 링크로 이동합니다.</p>
+      </details>
+      <details>
+        <summary>카카오톡에서 안 열리면?</summary>
+        <p>카카오톡 오른쪽 하단 또는 상단 메뉴에서 “외부 브라우저로 열기 / Safari로 열기”를 선택한 뒤 다시 시도하면 안정적입니다.</p>
+      </details>
+    </section>
+
+    <footer class="footer">© 2026 Easy Shortcut</footer>
+  </main>
+</body>
+</html>

@@ -1,5 +1,8 @@
-/* Easy Shortcut - stable reset reset20260606a
- * 핵심: iPhone 홈 화면 아이콘 실행 시 coupang.html / ali.html에서 쇼핑 링크로 자동 이동
+/* Easy Shortcut - stable20260606b
+ * 정리 버전
+ * - index.html: 쇼핑홈 메인
+ * - coupang.html: 쿠팡 아이콘 설치 + 홈화면 실행 시 쿠팡 자동 이동
+ * - ali.html: 알리 아이콘 설치 + 홈화면 실행 시 알리 자동 이동
  */
 (() => {
   "use strict";
@@ -33,11 +36,23 @@
   };
 
   function absoluteUrl(path) {
-    try { return new URL(path, location.href).toString(); } catch { return path; }
+    try { return new URL(path, location.href).toString(); }
+    catch { return path; }
   }
 
   function getParam(name) {
-    try { return new URL(location.href).searchParams.get(name); } catch { return null; }
+    try { return new URL(location.href).searchParams.get(name); }
+    catch { return null; }
+  }
+
+  function addParam(url, key, value) {
+    try {
+      const u = new URL(url, location.href);
+      u.searchParams.set(key, value);
+      return u.toString();
+    } catch {
+      return url;
+    }
   }
 
   function getShop(shopId) {
@@ -128,7 +143,7 @@
     return (
       "naversearchapp://addshortcut?" +
       "url=" + encodeURIComponent(shop.targetUrl) +
-      "&icon=" + encodeURIComponent(absoluteUrl(shop.icon)) +
+      "&icon=" + encodeURIComponent(absoluteUrl(shop.icon + "?v=stable20260606b")) +
       "&title=" + encodeURIComponent(shop.shortName) +
       "&serviceCode=whois&version=11"
     );
@@ -142,12 +157,23 @@
     location.href = makeNaverShortcutUrl(shopId);
   }
 
+  async function copyShopLink(shopId) {
+    const shop = getShop(shopId) || pageShop();
+    if (!shop) return;
+    try {
+      await navigator.clipboard.writeText(shop.targetUrl);
+      showToast(`${shop.shortName} 링크를 복사했습니다.`);
+    } catch {
+      showToast("복사 권한이 없어 직접 길게 눌러 복사해주세요.");
+    }
+  }
+
   function kakaoExternalUrl(url) {
     return "kakaotalk://web/openExternal?url=" + encodeURIComponent(absoluteUrl(url));
   }
 
   function openExternalCurrent() {
-    const url = absoluteUrl(location.href);
+    const url = addParam(absoluteUrl(location.href), "openExternal", "1");
     if (IS.kakao && IS.ios) {
       location.href = kakaoExternalUrl(url);
       return;
@@ -155,12 +181,31 @@
     window.open(url, "_blank", "noopener,noreferrer");
   }
 
+  function ensureKakaoOverlay() {
+    if ($("#kakaotalk-guide")) return;
+    document.body.insertAdjacentHTML("afterbegin", `
+      <div id="kakaotalk-guide" class="overlay" aria-hidden="true">
+        <div class="overlay-panel" role="dialog" aria-modal="true" aria-labelledby="kakao-title">
+          <button class="overlay-close" type="button" data-close-overlay aria-label="닫기">×</button>
+          <div class="overlay-badge">💬</div>
+          <p class="overlay-eyebrow">카카오톡 인앱 브라우저 감지</p>
+          <h2 id="kakao-title">외부 브라우저에서 열어주세요</h2>
+          <p id="kakao-desc" class="overlay-desc"></p>
+          <button id="open-ext-btn" class="primary-btn overlay-btn" type="button">외부 브라우저로 열기</button>
+          <p id="kakao-subnote" class="overlay-note"></p>
+        </div>
+      </div>
+    `);
+  }
+
   function showKakaoOverlay() {
+    ensureKakaoOverlay();
     const guide = $("#kakaotalk-guide");
-    if (!guide) return;
     const desc = $("#kakao-desc");
     const btn = $("#open-ext-btn");
     const note = $("#kakao-subnote");
+    if (!guide) return;
+
     if (desc) desc.innerHTML = IS.ios
       ? "카카오톡 내부에서는 <b>홈 화면 추가</b>가 잘 안 보일 수 있어요.<br>Safari에서 열면 설치가 가장 안정적입니다."
       : "카카오톡 내부에서는 <b>바로가기 추가</b>가 제한될 수 있어요.<br>기본 브라우저나 네이버앱에서 다시 열어주세요.";
@@ -180,6 +225,7 @@
     guide.setAttribute("aria-hidden", "true");
   }
 
+  let autoTimer = null;
   function autoRedirectFromHomeIcon() {
     const shop = pageShop();
     const isSinglePage = document.body.classList.contains("single-page");
@@ -187,15 +233,16 @@
     if (getParam("debug") === "1") return;
     if (IS.kakao) return;
 
-    // iPhone 홈 화면 아이콘 또는 PWA/standalone 실행일 때만 자동 이동.
+    // iPhone 홈 화면 아이콘 또는 standalone 실행일 때만 자동 이동합니다.
+    // Safari에서 설치 안내를 보는 중에는 이동하지 않습니다.
     if (!IS.standalone) return;
 
     const card = $("[data-auto-card]");
     if (card) card.hidden = false;
 
-    setTimeout(() => {
+    autoTimer = setTimeout(() => {
       location.replace(shop.targetUrl);
-    }, 250);
+    }, 350);
   }
 
   function bindEvents() {
@@ -206,6 +253,7 @@
       });
     });
 
+    // 예전 단일 페이지 버튼 호환용
     $$('[data-open-target]').forEach((el) => {
       el.addEventListener("click", (e) => {
         e.preventDefault();
@@ -213,11 +261,18 @@
       });
     });
 
-    // 현재 index.html의 버튼명과 이전 버전의 버튼명 둘 다 지원
+    // 현재 index.html의 data-naver-shortcut과 이전 data-shortcut-shop 둘 다 지원
     $$('[data-naver-shortcut], [data-shortcut-shop]').forEach((el) => {
       el.addEventListener("click", (e) => {
         e.preventDefault();
         addAndroidShortcut(el.dataset.naverShortcut || el.dataset.shortcutShop);
+      });
+    });
+
+    $$('[data-copy-shop]').forEach((el) => {
+      el.addEventListener("click", (e) => {
+        e.preventDefault();
+        copyShopLink(el.dataset.copyShop);
       });
     });
 
@@ -228,14 +283,25 @@
       });
     });
 
+    $$('[data-cancel-auto]').forEach((el) => {
+      el.addEventListener("click", (e) => {
+        e.preventDefault();
+        if (autoTimer) clearTimeout(autoTimer);
+        const card = $("[data-auto-card]");
+        if (card) card.hidden = true;
+        showToast("자동 이동을 취소했습니다.");
+      });
+    });
+
     $$('[data-close-overlay]').forEach((el) => el.addEventListener("click", closeOverlay));
     const guide = $("#kakaotalk-guide");
     if (guide) guide.addEventListener("click", (e) => { if (e.target === guide) closeOverlay(); });
+    document.addEventListener("keydown", (event) => { if (event.key === "Escape") closeOverlay(); });
   }
 
   function registerServiceWorker() {
     if (!("serviceWorker" in navigator)) return;
-    navigator.serviceWorker.register("./sw.js?v=reset20260606a").catch(() => null);
+    navigator.serviceWorker.register("./sw.js?v=stable20260606b").catch(() => null);
   }
 
   function init() {

@@ -1,4 +1,4 @@
-const CACHE_NAME = "shopping-home-reset20260606a";
+const CACHE_NAME = "shopping-home-stable20260606b";
 const ASSETS = [
   "./",
   "./index.html",
@@ -35,16 +35,36 @@ self.addEventListener("fetch", (event) => {
 
   const url = new URL(req.url);
   const isExternal = url.origin !== self.location.origin;
+
+  // 외부 쇼핑몰/광고 링크는 서비스워커가 관여하지 않습니다.
   if (isExternal) return;
 
-  // 꼬인 캐시 방지: 내부 파일은 네트워크 우선, 실패 시에만 캐시 사용
+  const isHtml = req.mode === "navigate" || url.pathname.endsWith(".html") || url.pathname.endsWith("/");
+  const isCode = /\.(css|js|json)$/i.test(url.pathname);
+
+  // HTML/CSS/JS/manifest는 네트워크 우선: 배포 후 예전 코드가 오래 남는 문제를 줄입니다.
+  if (isHtml || isCode) {
+    event.respondWith(
+      fetch(req)
+        .then((response) => {
+          const copy = response.clone();
+          caches.open(CACHE_NAME).then((cache) => cache.put(req, copy)).catch(() => null);
+          return response;
+        })
+        .catch(() => caches.match(req).then((cached) => cached || caches.match("./index.html")))
+    );
+    return;
+  }
+
+  // 아이콘 등 정적 파일은 캐시 우선, 없으면 네트워크.
   event.respondWith(
-    fetch(req)
-      .then((response) => {
+    caches.match(req).then((cached) => {
+      if (cached) return cached;
+      return fetch(req).then((response) => {
         const copy = response.clone();
         caches.open(CACHE_NAME).then((cache) => cache.put(req, copy)).catch(() => null);
         return response;
-      })
-      .catch(() => caches.match(req).then((cached) => cached || caches.match("./index.html")))
+      });
+    })
   );
 });

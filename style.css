@@ -374,3 +374,211 @@ body.single-page {
   .install-page h1 { font-size: 23px; }
   .big-icon { width: 86px; height: 86px; }
 }
+
+
+/* ─────────────────────────────────────────
+   Single install page guide upgrade
+   메인 페이지의 "홈 화면 추가 방법" 카드 디자인을 설치 페이지에도 적용
+───────────────────────────────────────── */
+.install-section {
+  width: 100%;
+  margin-bottom: 16px;
+}
+.install-section-title {
+  color: var(--text);
+  margin: 0 0 12px;
+  justify-content: flex-start;
+}
+.install-section-title .badge {
+  color: white;
+  background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+  box-shadow: 0 8px 18px rgba(16, 24, 40, 0.12);
+}
+.install-guide-card {
+  width: 100%;
+  padding: 21px;
+  text-align: left;
+  background: linear-gradient(180deg, rgba(255,255,255,0.98), rgba(249,250,251,0.98));
+  border: 1px solid rgba(228, 231, 236, 0.95);
+  box-shadow: 0 12px 28px rgba(16, 24, 40, 0.10);
+}
+.install-guide-card .guide-header {
+  padding-bottom: 14px;
+  margin-bottom: 15px;
+  border-bottom: 1px solid var(--line);
+}
+.install-guide-card .guide-header h2 {
+  font-size: 18px;
+}
+.install-guide-card .guide-copy {
+  margin-bottom: 16px;
+}
+.install-guide-card .guide-copy b {
+  color: var(--primary-dark);
+  font-weight: 900;
+}
+.install-steps {
+  gap: 15px;
+}
+.install-steps li {
+  padding: 13px 12px;
+  border-radius: 16px;
+  background: #ffffff;
+  border: 1px solid rgba(228, 231, 236, 0.9);
+  box-shadow: 0 4px 14px rgba(16, 24, 40, 0.06);
+}
+.install-steps b {
+  background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+  box-shadow: 0 8px 14px rgba(16, 24, 40, 0.12);
+}
+.install-steps strong {
+  color: var(--primary-dark);
+  font-weight: 900;
+}
+.result-box {
+  margin-top: 16px;
+  padding: 14px 15px;
+  border-radius: 18px;
+  background: rgba(99, 102, 241, 0.07);
+  border: 1px solid rgba(99, 102, 241, 0.13);
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.coupang-theme .result-box {
+  background: rgba(229, 39, 61, 0.07);
+  border-color: rgba(229, 39, 61, 0.14);
+}
+.ali-theme .result-box {
+  background: rgba(249, 115, 22, 0.08);
+  border-color: rgba(249, 115, 22, 0.16);
+}
+.result-icon {
+  width: 42px;
+  height: 42px;
+  border-radius: 15px;
+  background: #ffffff;
+  box-shadow: 0 6px 16px rgba(16, 24, 40, 0.10);
+  display: grid;
+  place-items: center;
+  font-size: 22px;
+  flex: 0 0 auto;
+}
+.result-box p {
+  font-size: 13px;
+  line-height: 1.55;
+  color: var(--muted);
+  font-weight: 700;
+}
+.result-box b {
+  color: var(--primary-dark);
+  font-weight: 900;
+}
+.kakao-install-card {
+  background: #fee500;
+  border-color: rgba(60, 30, 30, 0.12);
+}
+.kakao-install-card .guide-copy {
+  color: #3c1e1e;
+}
+.install-actions {
+  width: 100%;
+  margin-top: 2px;
+}
+
+@media (max-width: 360px) {
+  .install-guide-card { padding: 18px; }
+  .install-steps li { padding: 12px 10px; }
+  .result-box { padding: 12px; }
+}
+
+
+/* ─────────────────────────────────────────
+   INSTALL PAGE GUIDE POPUP
+───────────────────────────────────────── */
+.install-guide-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 11000;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  padding: 22px;
+  background: rgba(15, 23, 42, 0.62);
+  backdrop-filter: blur(14px);
+}
+.install-guide-overlay.show { display: flex; }
+.install-guide-panel {
+  position: relative;
+  width: min(100%, 390px);
+  max-height: calc(100vh - 44px);
+  overflow: auto;
+  background: rgba(255, 255, 255, 0.98);
+  border-radius: 28px;
+  padding: 26px 22px 22px;
+  box-shadow: 0 28px 70px rgba(0, 0, 0, 0.32);
+  border: 1px solid rgba(255, 255, 255, 0.75);
+}
+.install-guide-top {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 14px;
+}
+.install-guide-top .emoji { font-size: 28px; }
+.install-guide-top .badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 30px;
+  padding: 6px 14px;
+  border-radius: 999px;
+  background: rgba(99, 102, 241, 0.11);
+  color: var(--primary-dark);
+  font-size: 13px;
+  font-weight: 900;
+}
+.install-guide-panel h2 {
+  font-size: 25px;
+  line-height: 1.25;
+  letter-spacing: -0.6px;
+  margin: 0 34px 10px 0;
+  color: var(--text-dark);
+}
+.install-guide-desc {
+  font-size: 14px;
+  line-height: 1.65;
+  color: var(--text-gray);
+  margin-bottom: 18px;
+}
+.install-guide-desc b { color: var(--text-dark); }
+.install-guide-popup-steps {
+  gap: 14px;
+  margin-bottom: 18px;
+}
+.install-guide-popup-steps li {
+  background: #f8fafc;
+  border: 1px solid rgba(99, 102, 241, 0.12);
+  border-radius: 18px;
+  padding: 14px 14px 14px 12px;
+  box-shadow: var(--shadow-sm);
+}
+.install-guide-popup-steps li b {
+  width: 32px;
+  height: 32px;
+  font-size: 14px;
+}
+.install-guide-popup-steps li span {
+  font-size: 15px;
+  line-height: 1.55;
+  font-weight: 700;
+}
+.popup-result-box { margin-bottom: 16px; }
+.primary-btn.full { width: 100%; }
+
+@media (max-width: 360px) {
+  .install-guide-overlay { padding: 16px; }
+  .install-guide-panel { border-radius: 24px; padding: 24px 18px 18px; }
+  .install-guide-panel h2 { font-size: 22px; }
+  .install-guide-popup-steps li span { font-size: 14px; }
+}

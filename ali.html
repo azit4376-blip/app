@@ -2,43 +2,97 @@
 <html lang="ko">
 <head>
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-  <title>알리</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, viewport-fit=cover">
+  <meta name="format-detection" content="telephone=no">
+  <title>알리 바로가기 만들기</title>
+  <meta name="description" content="알리익스프레스 바로가기 아이콘을 홈 화면에 추가하고 빠르게 알리로 이동하세요.">
+  <meta name="theme-color" content="#f97316">
   <meta name="apple-mobile-web-app-title" content="알리">
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="default">
   <link rel="apple-touch-icon" href="ali-icon.png">
   <link rel="icon" href="ali-icon.png">
+  <link rel="manifest" href="manifest.json">
   <link rel="stylesheet" href="style.css">
   <script src="app.js" defer></script>
 </head>
-<body class="single-page" data-shop-id="ali" data-target-url="https://s.click.aliexpress.com/e/_DkmHcWJ" data-target-name="알리">
+<body class="single-page" data-page="shop" data-shop-id="ali" data-target-url="https://s.click.aliexpress.com/e/_DkmHcWJ" data-target-name="알리">
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
+
   <main class="install-page ali-theme">
-    <section class="notice notice-top">
+    <section class="notice-card disclosure small">
       <b>📢 안내</b> 이 바로가기를 통해 구매가 발생하면 운영자에게 일정 금액의 광고 수익이 제공될 수 있습니다.
     </section>
 
     <img src="ali-icon.png" alt="알리익스프레스" class="big-icon">
+    <p class="eyebrow">Shortcut Installer</p>
     <h1>알리 아이콘 만들기</h1>
-    <p class="lead">이 페이지를 홈 화면에 추가하면,<br>아이콘을 누를 때 알리 링크로 연결됩니다.</p>
+    <p class="lead">설치할 때는 이 안내 페이지를 열고,<br>홈 화면 아이콘을 누르면 알리으로 바로 이동합니다.</p>
 
-    <div class="ios-guide-box">
-      <div class="step">
-        <b>1</b>
-        <span>Safari 하단 공유 버튼 <strong>↑</strong> 누르기</span>
+    <section class="auto-card" data-auto-card hidden>
+      <b>알리으로 이동 준비 중...</b>
+      <span>홈 화면 아이콘 실행으로 감지되어 자동 이동합니다.</span>
+      <button type="button" class="text-btn" data-cancel-auto>자동 이동 취소</button>
+    </section>
+
+    <section class="install-section only-ios">
+      <div class="section-title install-section-title">
+        <span class="badge">iPhone</span>
+        <span class="emoji">🍎</span>
+        <span>홈 화면 추가 방법</span>
       </div>
-      <div class="step">
-        <b>2</b>
-        <span><strong>홈 화면에 추가</strong> 선택</span>
+
+      <div class="guide-card install-guide-card">
+        <div class="guide-header">
+          <span class="emoji">📌</span>
+          <h2>Safari에서 아이콘 만들기</h2>
+        </div>
+        <p class="guide-copy">아래 순서대로 추가하면 바탕화면에 <b>알리</b> 아이콘이 생성됩니다.</p>
+        <ol class="steps install-steps">
+          <li><b>1</b><span>Safari 하단의 <strong>공유 버튼 ↑</strong>을 누릅니다.</span></li>
+          <li><b>2</b><span>메뉴에서 <strong>홈 화면에 추가</strong>를 선택합니다.</span></li>
+          <li><b>3</b><span>이름이 <strong>알리</strong>인지 확인한 뒤 <strong>추가</strong>를 누릅니다.</span></li>
+        </ol>
+        <div class="result-box">
+          <span class="result-icon">🌏</span>
+          <p>생성된 아이콘을 누르면<br><b>알리으로 자동 이동</b>합니다.</p>
+        </div>
       </div>
-      <div class="step">
-        <b>3</b>
-        <span>이름이 <strong>알리</strong>인지 확인 후 추가</span>
+    </section>
+
+    <section class="install-section only-android">
+      <div class="section-title install-section-title">
+        <span class="badge">Android</span>
+        <span class="emoji">📱</span>
+        <span>바로가기 추가</span>
       </div>
+
+      <div class="guide-card install-guide-card">
+        <div class="guide-header">
+          <span class="emoji">✅</span>
+          <h2>네이버앱으로 추가하기</h2>
+        </div>
+        <p class="guide-copy">Android는 아래 버튼을 누르면 네이버앱 바로가기 추가 화면으로 이동합니다.</p>
+        <button class="secondary-btn full" type="button" data-shortcut-shop="ali">알리 홈 화면 아이콘 추가</button>
+      </div>
+    </section>
+
+    <section class="install-section only-kakao">
+      <div class="guide-card install-guide-card kakao-install-card">
+        <div class="guide-header">
+          <span class="emoji">💬</span>
+          <h2>카카오톡에서 열었다면</h2>
+        </div>
+        <p class="guide-copy">카카오톡 안에서는 홈 화면 추가가 제한될 수 있어요. Safari 또는 외부 브라우저에서 다시 열어주세요.</p>
+        <button class="secondary-btn full" type="button" data-open-external-current>외부 브라우저로 열기</button>
+      </div>
+    </section>
+
+    <div class="install-actions">
+      <button class="primary-btn" type="button" data-open-shop="ali">알리으로 바로 이동</button>
+      <button class="ghost-btn" type="button" data-copy-shop="ali">링크 복사</button>
+      <a class="sub-link" href="index.html">다른 아이콘 만들기</a>
     </div>
-
-    <button class="primary-btn" type="button" data-open-target>알리로 바로 이동</button>
-    <a class="sub-link" href="index.html">다른 아이콘 만들기</a>
   </main>
 </body>
 </html>

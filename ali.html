@@ -3,38 +3,46 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <meta name="format-detection" content="telephone=no">
   <title>알리</title>
   <meta name="apple-mobile-web-app-title" content="알리">
   <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="default">
+  <link rel="apple-touch-icon" sizes="180x180" href="https://azit4376-blip.github.io/app/ali-icon.png">
   <link rel="apple-touch-icon" href="ali-icon.png">
   <link rel="icon" href="ali-icon.png">
-  <link rel="stylesheet" href="style.css">
-  <script src="app.js" defer></script>
+  <link rel="stylesheet" href="style.css?v=reset20260606a">
+  <script src="app.js?v=reset20260606a" defer></script>
 </head>
 <body class="single-page" data-shop-id="ali" data-target-url="https://s.click.aliexpress.com/e/_DkmHcWJ" data-target-name="알리">
   <main class="install-page ali-theme">
-    <section class="notice notice-top">
+    <section class="notice-card small">
       <b>📢 안내</b> 이 바로가기를 통해 구매가 발생하면 운영자에게 일정 금액의 광고 수익이 제공될 수 있습니다.
     </section>
 
     <img src="ali-icon.png" alt="알리익스프레스" class="big-icon">
     <h1>알리 아이콘 만들기</h1>
-    <p class="lead">이 페이지를 홈 화면에 추가하면,<br>아이콘을 누를 때 알리 링크로 연결됩니다.</p>
+    <p class="lead">이 페이지를 홈 화면에 추가하면,<br>아이콘을 누를 때 알리 링크로 자동 연결됩니다.</p>
 
-    <div class="ios-guide-box">
-      <div class="step">
-        <b>1</b>
-        <span>Safari 하단 공유 버튼 <strong>↑</strong> 누르기</span>
-      </div>
-      <div class="step">
-        <b>2</b>
-        <span><strong>홈 화면에 추가</strong> 선택</span>
-      </div>
-      <div class="step">
-        <b>3</b>
-        <span>이름이 <strong>알리</strong>인지 확인 후 추가</span>
-      </div>
+    <section class="platform-guide only-ios">
+      <div class="guide-mini-title">🍎 iPhone 홈 화면 추가 순서</div>
+      <ol class="steps compact">
+        <li><b>1</b><span>Safari 하단의 <strong>공유 버튼 ↑</strong>을 누릅니다.</span></li>
+        <li><b>2</b><span><strong>홈 화면에 추가</strong>를 선택합니다.</span></li>
+        <li><b>3</b><span>이름이 <strong>알리</strong>인지 확인한 뒤 추가합니다.</span></li>
+      </ol>
+    </section>
+
+    <section class="platform-guide only-android">
+      <div class="guide-mini-title">📱 Android 안내</div>
+      <p>Android는 메인 페이지의 네이버앱 바로가기 추가 버튼을 이용하는 방식이 가장 안정적입니다.</p>
+      <a class="secondary-btn full" href="index.html#android-shortcuts">Android 추가 화면으로 가기</a>
+    </section>
+
+    <div class="auto-card" data-auto-card hidden>
+      <b>알리으로 이동 중...</b>
+      <span>홈 화면 아이콘 실행이 감지되어 자동으로 이동합니다.</span>
     </div>
 
     <button class="primary-btn" type="button" data-open-target>알리로 바로 이동</button>

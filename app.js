@@ -183,26 +183,36 @@
     window.open(target, "_blank", "noopener,noreferrer");
   }
 
-  function makeNaverShortcutUrl(shopId) {
+  function makeNaverShortcutIntent(shopId) {
     const shop = getShop(shopId);
     if (!shop) return "#";
 
+    const shortcutUrl = shop.targetUrl;
+    const iconUrl = absoluteUrl(shop.icon);
+    const title = shop.shortName;
+    const naverStore = "https://play.google.com/store/apps/details?id=com.nhn.android.search&hl=ko";
+
     return (
-      `naversearchapp://addshortcut?` +
-      `url=${encodeURIComponent(shop.targetUrl)}` +
-      `&icon=${encodeURIComponent(absoluteUrl(shop.icon))}` +
-      `&title=${encodeURIComponent(shop.shortName)}` +
-      `&serviceCode=whois&version=11`
+      `intent://addshortcut?` +
+      `url=${encodeURIComponent(shortcutUrl)}` +
+      `&icon=${encodeURIComponent(iconUrl)}` +
+      `&title=${encodeURIComponent(title)}` +
+      `&serviceCode=whois&version=11` +
+      `#Intent;scheme=naversearchapp;action=android.intent.action.VIEW;` +
+      `category=android.intent.category.BROWSABLE;` +
+      `package=com.nhn.android.search;` +
+      `S.browser_fallback_url=${encodeURIComponent(naverStore)};` +
+      `end;`
     );
   }
 
   function addAndroidShortcut(shopId) {
     if (!IS.android) {
-      showToast("Android에서 바로가기 추가 기능을 사용할 수 있어요.");
+      showToast("Android에서 네이버앱 바로가기 추가 기능을 사용할 수 있어요.");
       return;
     }
-    location.href = makeNaverShortcutUrl(shopId);
-    setTimeout(() => showToast("네이버앱 바로가기 추가 화면으로 이동합니다."), 500);
+    location.href = makeNaverShortcutIntent(shopId);
+    setTimeout(() => showToast("네이버앱이 없다면 설치 화면으로 이동합니다."), 800);
   }
 
   async function copyShopLink(shopId) {
@@ -264,58 +274,6 @@
     guide.setAttribute("aria-hidden", "false");
   }
 
-
-  function ensureInstallGuideOverlay() {
-    if ($('#install-guide-overlay')) return;
-    const shop = pageShop();
-    if (!shop) return;
-    document.body.insertAdjacentHTML('beforeend', `
-      <div id="install-guide-overlay" class="install-guide-overlay" aria-hidden="true">
-        <div class="install-guide-panel" role="dialog" aria-modal="true" aria-labelledby="install-guide-title">
-          <button class="overlay-close" type="button" data-close-install-guide aria-label="닫기">×</button>
-          <div class="install-guide-top">
-            <span class="emoji">🍎</span>
-            <span class="badge">iPhone</span>
-          </div>
-          <h2 id="install-guide-title">홈 화면 추가 방법</h2>
-          <p class="install-guide-desc">아래 순서대로 추가하면 바탕화면에 <b>${shop.shortName}</b> 아이콘이 생성됩니다.</p>
-          <ol class="steps install-guide-popup-steps">
-            <li><b>1</b><span>Safari 하단의 <strong>공유 버튼 ↑</strong>을 누릅니다.</span></li>
-            <li><b>2</b><span><strong>홈 화면에 추가</strong>를 선택합니다.</span></li>
-            <li><b>3</b><span>이름이 <strong>${shop.shortName}</strong>인지 확인한 뒤 <strong>추가</strong>를 누릅니다.</span></li>
-          </ol>
-          <div class="result-box popup-result-box">
-            <span class="result-icon">✅</span>
-            <p>생성된 아이콘을 누르면<br><b>${shop.shortName}으로 자동 이동</b>합니다.</p>
-          </div>
-          <button class="primary-btn full" type="button" data-close-install-guide>확인했어요</button>
-        </div>
-      </div>
-    `);
-  }
-
-  function closeInstallGuideOverlay() {
-    const guide = $('#install-guide-overlay');
-    if (!guide) return;
-    guide.classList.remove('show');
-    guide.setAttribute('aria-hidden', 'true');
-  }
-
-  function showInstallGuideOverlay() {
-    const shop = pageShop();
-    if (!shop) return;
-    if (!IS.ios || IS.standalone || IS.kakao) return;
-    if (getParam('guide') === '0') return;
-
-    ensureInstallGuideOverlay();
-    const guide = $('#install-guide-overlay');
-    if (!guide) return;
-    requestAnimationFrame(() => {
-      guide.classList.add('show');
-      guide.setAttribute('aria-hidden', 'false');
-    });
-  }
-
   function bindEvents() {
     $$('[data-open-shop]').forEach((el) => {
       el.addEventListener("click", (event) => {
@@ -328,13 +286,6 @@
       el.addEventListener("click", (event) => {
         event.preventDefault();
         addAndroidShortcut(el.dataset.shortcutShop);
-      });
-    });
-
-    $$('[data-naver-shortcut]').forEach((el) => {
-      el.addEventListener("click", (event) => {
-        event.preventDefault();
-        addAndroidShortcut(el.dataset.naverShortcut);
       });
     });
 
@@ -353,13 +304,6 @@
     });
 
     $$('[data-close-overlay]').forEach((el) => el.addEventListener("click", closeOverlay));
-    $$('[data-close-install-guide]').forEach((el) => el.addEventListener("click", closeInstallGuideOverlay));
-    const installGuide = $("#install-guide-overlay");
-    if (installGuide) {
-      installGuide.addEventListener("click", (event) => {
-        if (event.target === installGuide) closeInstallGuideOverlay();
-      });
-    }
     const guide = $("#kakaotalk-guide");
     if (guide) {
       guide.addEventListener("click", (event) => {
@@ -367,10 +311,7 @@
       });
     }
     document.addEventListener("keydown", (event) => {
-      if (event.key === "Escape") {
-        closeOverlay();
-        closeInstallGuideOverlay();
-      }
+      if (event.key === "Escape") closeOverlay();
     });
   }
 
@@ -390,18 +331,9 @@
     const autoCard = $('[data-auto-card]');
     if (autoCard) autoCard.hidden = false;
 
-    const timer = setTimeout(() => {
+    setTimeout(() => {
       location.replace(shop.targetUrl);
-    }, 600);
-
-    const cancelButton = $('[data-cancel-auto]');
-    if (cancelButton) {
-      cancelButton.addEventListener("click", () => {
-        clearTimeout(timer);
-        if (autoCard) autoCard.hidden = true;
-        showToast("자동 이동을 취소했습니다.");
-      }, { once: true });
-    }
+    }, 350);
   }
 
   function registerServiceWorker() {
@@ -415,8 +347,6 @@
 
     if (IS.kakao && getParam("openExternal") !== "1") {
       showKakaoOverlay();
-    } else {
-      showInstallGuideOverlay();
     }
 
     autoRedirectFromHomeIcon();

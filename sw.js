@@ -1,4 +1,4 @@
-const CACHE_NAME = "shopping-home-v7-install-guide-design";
+const CACHE_NAME = "shopping-home-v5";
 const ASSETS = [
   "./",
   "./index.html",
@@ -16,7 +16,11 @@ const ASSETS = [
 self.addEventListener("install", (event) => {
   event.waitUntil(
     caches.open(CACHE_NAME)
-      .then((cache) => Promise.allSettled(ASSETS.map((asset) => cache.add(asset))))
+      .then((cache) =>
+        Promise.allSettled(
+          ASSETS.map((asset) => cache.add(asset))
+        )
+      )
       .then(() => self.skipWaiting())
   );
 });
@@ -24,7 +28,13 @@ self.addEventListener("install", (event) => {
 self.addEventListener("activate", (event) => {
   event.waitUntil(
     caches.keys()
-      .then((keys) => Promise.all(keys.filter((key) => key !== CACHE_NAME).map((key) => caches.delete(key))))
+      .then((keys) =>
+        Promise.all(
+          keys
+            .filter((key) => key !== CACHE_NAME)
+            .map((key) => caches.delete(key))
+        )
+      )
       .then(() => self.clients.claim())
   );
 });
@@ -33,17 +43,31 @@ self.addEventListener("fetch", (event) => {
   const req = event.request;
   if (req.method !== "GET") return;
 
+  // 외부 리소스(Google favicons 등)는 네트워크 우선, 실패 시 캐시
   const isExternal = !req.url.startsWith(self.location.origin);
-  if (isExternal) return;
 
-  // 배포 직후 예전 디자인/JS가 남지 않도록 내부 파일은 네트워크 우선으로 가져옵니다.
+  if (isExternal) {
+    event.respondWith(
+      fetch(req)
+        .then((response) => {
+          const copy = response.clone();
+          caches.open(CACHE_NAME).then((cache) => cache.put(req, copy)).catch(() => null);
+          return response;
+        })
+        .catch(() => caches.match(req))
+    );
+    return;
+  }
+
+  // 내부 리소스: 캐시 우선
   event.respondWith(
-    fetch(req)
-      .then((response) => {
+    caches.match(req).then((cached) => {
+      if (cached) return cached;
+      return fetch(req).then((response) => {
         const copy = response.clone();
         caches.open(CACHE_NAME).then((cache) => cache.put(req, copy)).catch(() => null);
         return response;
-      })
-      .catch(() => caches.match(req).then((cached) => cached || caches.match("./index.html")))
+      }).catch(() => caches.match("./index.html"));
+    })
   );
 });

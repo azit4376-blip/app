@@ -1,4 +1,4 @@
-const CACHE_NAME = "shopping-home-v4";
+const CACHE_NAME = "shopping-home-v5";
 const ASSETS = [
   "./",
   "./index.html",
@@ -16,7 +16,11 @@ const ASSETS = [
 self.addEventListener("install", (event) => {
   event.waitUntil(
     caches.open(CACHE_NAME)
-      .then((cache) => cache.addAll(ASSETS))
+      .then((cache) =>
+        Promise.allSettled(
+          ASSETS.map((asset) => cache.add(asset))
+        )
+      )
       .then(() => self.skipWaiting())
   );
 });

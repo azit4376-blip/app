@@ -70,14 +70,40 @@
 
   function pageShop() {
     const body = document.body;
-    const shopId = body.dataset.shopId;
+
+    // 단일 설치 페이지(coupang.html / ali.html)는 data-shop-id가 있으면 가장 정확합니다.
+    // 혹시 기존 파일처럼 data-shop-id가 빠져 있어도 파일명과 data-target-url로 한 번 더 추정합니다.
+    let shopId = body.dataset.shopId || "";
+    const path = location.pathname.toLowerCase();
+
+    if (!shopId) {
+      if (path.includes("coupang")) shopId = "coupang";
+      else if (path.includes("ali")) shopId = "ali";
+    }
+
     const base = getShop(shopId);
-    if (!base) return null;
-    return {
-      ...base,
-      targetUrl: body.dataset.targetUrl || base.targetUrl,
-      shortName: body.dataset.targetName || base.shortName
-    };
+
+    if (base) {
+      return {
+        ...base,
+        targetUrl: body.dataset.targetUrl || base.targetUrl,
+        shortName: body.dataset.targetName || base.shortName
+      };
+    }
+
+    // 최후 보정: data-target-url만 있어도 홈화면 자동 이동이 가능하게 처리
+    if (body.dataset.targetUrl) {
+      return {
+        id: shopId || "custom",
+        name: body.dataset.targetName || "쇼핑몰",
+        shortName: body.dataset.targetName || "쇼핑몰",
+        targetUrl: body.dataset.targetUrl,
+        icon: "",
+        theme: ""
+      };
+    }
+
+    return null;
   }
 
   function showToast(message) {
@@ -293,33 +319,21 @@
     const shop = pageShop();
     if (!shop) return;
 
-    const isInstallMode = getParam("install") === "1";
     const openedExternal = getParam("openExternal") === "1";
 
-    // iPhone에서 홈 화면에 추가할 때 coupang.html?install=1 상태로 저장될 수 있습니다.
-    // 따라서 standalone 실행이면 install=1이어도 실제 쇼핑 링크로 자동 이동해야 합니다.
-    const shouldAuto = !openedExternal && (
-      IS.standalone ||
-      (!isInstallMode && (getParam("auto") === "1" || getParam("source") === "shortcut"))
-    );
+    // 핵심 iPhone 동작:
+    // Safari에서 설치 페이지를 볼 때는 안내만 보여주고,
+    // 홈 화면 아이콘으로 실행되어 standalone 상태가 되면 쿠팡/알리 링크로 자동 이동합니다.
+    const shouldAuto = !openedExternal && IS.standalone;
 
     if (!shouldAuto || IS.kakao) return;
 
     const autoCard = $('[data-auto-card]');
     if (autoCard) autoCard.hidden = false;
 
-    const timer = setTimeout(() => {
-      location.href = shop.targetUrl;
-    }, 900);
-
-    const cancelBtn = $('[data-cancel-auto]');
-    if (cancelBtn) {
-      cancelBtn.addEventListener("click", () => {
-        clearTimeout(timer);
-        if (autoCard) autoCard.hidden = true;
-        showToast("자동 이동을 취소했습니다.");
-      }, { once: true });
-    }
+    setTimeout(() => {
+      location.replace(shop.targetUrl);
+    }, 350);
   }
 
   function registerServiceWorker() {

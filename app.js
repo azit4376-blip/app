@@ -295,7 +295,14 @@
 
     const isInstallMode = getParam("install") === "1";
     const openedExternal = getParam("openExternal") === "1";
-    const shouldAuto = !isInstallMode && !openedExternal && (IS.standalone || getParam("auto") === "1" || getParam("source") === "shortcut");
+
+    // iPhone에서 홈 화면에 추가할 때 coupang.html?install=1 상태로 저장될 수 있습니다.
+    // 따라서 standalone 실행이면 install=1이어도 실제 쇼핑 링크로 자동 이동해야 합니다.
+    const shouldAuto = !openedExternal && (
+      IS.standalone ||
+      (!isInstallMode && (getParam("auto") === "1" || getParam("source") === "shortcut"))
+    );
+
     if (!shouldAuto || IS.kakao) return;
 
     const autoCard = $('[data-auto-card]');

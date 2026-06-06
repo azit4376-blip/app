@@ -1,4 +1,4 @@
-/* Easy Shortcut - stable20260606c
+/* Easy Shortcut - stable20260606e
  * 정리 버전
  * - index.html: 쇼핑홈 메인
  * - coupang.html: 쿠팡 아이콘 설치 + 홈화면 실행 시 쿠팡 자동 이동
@@ -143,7 +143,7 @@
     return (
       "naversearchapp://addshortcut?" +
       "url=" + encodeURIComponent(shop.targetUrl) +
-      "&icon=" + encodeURIComponent(absoluteUrl(shop.icon + "?v=stable20260606c")) +
+      "&icon=" + encodeURIComponent(absoluteUrl(shop.icon + "?v=stable20260606e")) +
       "&title=" + encodeURIComponent(shop.shortName) +
       "&serviceCode=whois&version=11"
     );
@@ -172,12 +172,39 @@
     return "kakaotalk://web/openExternal?url=" + encodeURIComponent(absoluteUrl(url));
   }
 
+  function makeAndroidDefaultBrowserIntent(url) {
+    const finalUrl = absoluteUrl(url);
+    const noProtocol = finalUrl.replace(/^https?:\/\//i, "");
+    return (
+      "intent://" + noProtocol +
+      "#Intent;scheme=https;action=android.intent.action.VIEW;" +
+      "category=android.intent.category.BROWSABLE;" +
+      "S.browser_fallback_url=" + encodeURIComponent(finalUrl) + ";" +
+      "end;"
+    );
+  }
+
   function openExternalCurrent() {
     const url = addParam(absoluteUrl(location.href), "openExternal", "1");
+
     if (IS.kakao && IS.ios) {
       location.href = kakaoExternalUrl(url);
       return;
     }
+
+    // Android 카카오톡에서는 네이버앱을 강제하지 않고,
+    // 사용자의 기본 브라우저 또는 Android 기본 열기 화면으로 넘깁니다.
+    if (IS.kakao && IS.android) {
+      location.href = makeAndroidDefaultBrowserIntent(url);
+      setTimeout(() => showToast("안 열리면 카카오톡 메뉴에서 외부 브라우저로 열어주세요."), 700);
+      return;
+    }
+
+    if (IS.android) {
+      location.href = makeAndroidDefaultBrowserIntent(url);
+      return;
+    }
+
     window.open(url, "_blank", "noopener,noreferrer");
   }
 
@@ -208,12 +235,12 @@
 
     if (desc) desc.innerHTML = IS.ios
       ? "카카오톡 내부에서는 <b>홈 화면 추가</b>가 잘 안 보일 수 있어요.<br>Safari에서 열면 설치가 가장 안정적입니다."
-      : "카카오톡 내부에서는 <b>바로가기 추가</b>가 제한될 수 있어요.<br>기본 브라우저나 네이버앱에서 다시 열어주세요.";
+      : "카카오톡 내부에서는 <b>바로가기 추가</b>가 제한될 수 있어요.<br>기본 브라우저에서 다시 열어주세요.";
     if (btn) {
-      btn.textContent = IS.ios ? "Safari로 열기" : "외부 브라우저로 열기";
+      btn.textContent = IS.ios ? "Safari로 열기" : "기본 브라우저로 열기";
       btn.onclick = openExternalCurrent;
     }
-    if (note) note.textContent = IS.ios ? "안 열리면 카카오톡 메뉴에서 Safari로 열기를 선택하세요." : "안 열리면 메뉴에서 외부 브라우저 열기를 선택하세요.";
+    if (note) note.textContent = IS.ios ? "안 열리면 카카오톡 메뉴에서 Safari로 열기를 선택하세요." : "기본 브라우저가 지정되어 있지 않으면 Android가 브라우저 선택창을 띄울 수 있습니다.";
     guide.classList.add("show");
     guide.setAttribute("aria-hidden", "false");
   }
@@ -301,7 +328,7 @@
 
   function registerServiceWorker() {
     if (!("serviceWorker" in navigator)) return;
-    navigator.serviceWorker.register("./sw.js?v=stable20260606c").catch(() => null);
+    navigator.serviceWorker.register("./sw.js?v=stable20260606e").catch(() => null);
   }
 
   function init() {

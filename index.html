@@ -9,7 +9,7 @@
   <title>Easy Shortcut - 쿠팡·알리 쇼핑 바로가기</title>
   <meta name="description" content="쿠팡, 알리익스프레스 바로가기 아이콘을 휴대폰 홈 화면에 추가하고 카카오톡·Safari·Android 환경에서 간편하게 쇼핑하세요.">
   <meta name="keywords" content="쇼핑 바로가기, 쿠팡 바로가기, 알리익스프레스 바로가기, 홈화면 추가, 카카오톡 외부브라우저, 네이버앱 바로가기">
-  <script type="text/javascript" nonce="XOJ0BVE+zr3qdJZKBBAaLFbFzesxhK/xP1QmLnOdycs=" src="//lc.getunicorn.org?type=base-script&amp;request-id=19257"></script><link rel="canonical" href="https://azit4376-blip.github.io/app/">
+  <link rel="canonical" href="https://azit4376-blip.github.io/app/">
 
   <meta property="og:type" content="website">
   <meta property="og:title" content="Easy Shortcut - 쿠팡·알리 쇼핑 바로가기">
@@ -102,21 +102,18 @@
           <span class="emoji">✅</span>
           <h2>네이버앱 바로가기 방식</h2>
         </div>
-        <p class="guide-copy">아래 버튼을 누르면 Android 앱 선택창을 최대한 거치지 않고 네이버앱의 바로가기 설치 화면으로 이동합니다.</p>
-
-        <button class="card card-primary" type="button" data-naver-shortcut="coupang">
+        <p class="guide-copy">Android는 네이버앱의 바로가기 기능을 이용하면 홈 화면에 쇼핑 아이콘을 바로 만들 수 있습니다.</p>
+        <button class="card card-primary" type="button" data-shortcut-shop="coupang">
           <span class="card-icon"><img src="coupang-icon.png" alt="쿠팡"></span>
-          <span class="card-text"><b>쿠팡 아이콘 추가</b><small>네이버앱으로 설치 진행</small></span>
+          <span class="card-text"><b>쿠팡 아이콘 추가</b><small>홈 화면에 쿠팡 바로가기 만들기</small></span>
           <span class="card-arrow">→</span>
         </button>
-
-        <button class="card" type="button" data-naver-shortcut="ali">
+        <button class="card" type="button" data-shortcut-shop="ali">
           <span class="card-icon"><img src="ali-icon.png" alt="알리"></span>
-          <span class="card-text"><b>알리 아이콘 추가</b><small>네이버앱으로 설치 진행</small></span>
+          <span class="card-text"><b>알리 아이콘 추가</b><small>홈 화면에 알리 바로가기 만들기</small></span>
           <span class="card-arrow">→</span>
         </button>
-
-        <p class="mini-note">네이버앱이 없으면 Play 스토어의 네이버앱 설치 화면으로 이동합니다.</p>
+        <p class="mini-note">네이버앱이 없으면 설치 화면으로 이동합니다.</p>
       </div>
     </section>
 
@@ -202,64 +199,5 @@
 
     <footer class="footer">© 2026 Easy Shortcut</footer>
   </main>
-
-  <script>
-    // Android: 네이버앱 바로가기 설치 화면 직접 호출
-    // 기존 intent:// 방식에서 앱 선택창이 뜨는 기기 대응용입니다.
-    (function () {
-      const SHORTCUTS = {
-        coupang: {
-          title: "쿠팡",
-          url: "https://link.coupang.com/a/cpO0Kv",
-          icon: "https://azit4376-blip.github.io/app/coupang-icon.png"
-        },
-        ali: {
-          title: "알리",
-          url: "https://s.click.aliexpress.com/e/_DkmHcWJ",
-          icon: "https://azit4376-blip.github.io/app/ali-icon.png"
-        }
-      };
-
-      const PLAY_STORE_INTENT =
-        "intent://details?id=com.nhn.android.search" +
-        "#Intent;scheme=market;package=com.android.vending;" +
-        "S.browser_fallback_url=" +
-        encodeURIComponent("https://play.google.com/store/apps/details?id=com.nhn.android.search&hl=ko") +
-        ";end";
-
-      function buildNaverShortcutUrl(item) {
-        return "naversearchapp://addshortcut" +
-          "?url=" + encodeURIComponent(item.url) +
-          "&icon=" + encodeURIComponent(item.icon) +
-          "&title=" + encodeURIComponent(item.title) +
-          "&serviceCode=whois" +
-          "&version=11";
-      }
-
-      function openNaverShortcut(shopKey) {
-        const item = SHORTCUTS[shopKey];
-        if (!item) return;
-
-        const startedAt = Date.now();
-        location.href = buildNaverShortcutUrl(item);
-
-        setTimeout(function () {
-          // 네이버앱으로 정상 전환되면 보통 페이지가 hidden 상태가 됩니다.
-          // 계속 현재 페이지에 남아 있으면 네이버앱 미설치/실패로 보고 Play 스토어로 보냅니다.
-          if (!document.hidden && Date.now() - startedAt < 2200) {
-            location.href = PLAY_STORE_INTENT;
-          }
-        }, 1200);
-      }
-
-      document.querySelectorAll("[data-naver-shortcut]").forEach(function (button) {
-        button.addEventListener("click", function (event) {
-          event.preventDefault();
-          openNaverShortcut(button.dataset.naverShortcut);
-        });
-      });
-    })();
-  </script>
-
 </body>
 </html>
